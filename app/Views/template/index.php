@@ -26,11 +26,10 @@
   <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
 
   <script src="/js/Chart.min.js"></script>
-  <script src="/js/Chart.js"></script>
+  <!-- <script src="/js/Chart.js"></script> -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script type="text/javascript" src="/js/datatables.min.js"></script>
-    <script src="/js/Gauge.js"></script>
     <script src="/js/gauge.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
@@ -351,8 +350,6 @@
     <!-- ========= All Javascript files linkup ======== -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/Chart.min.js"></script>
-    <script src="/js/Chart.js"></script>
     <script src="/js/dynamic-pie-chart.js"></script>
     <script src="/js/moment.min.js"></script>
     <script src="/js/fullcalendar.js"></script>

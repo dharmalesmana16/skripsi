@@ -40,28 +40,53 @@ class Device extends ResourceController
     }
 
     public function create(){
-     $data = [
-      'nama' => $this->request->getPost('device_name'),
-      'brand' => $this->request->getPost('device_brand'),
-      'tipekoneksi' => $this->request->getPost('device_connectivity'),
-      'latitude' => $this->request->getPost('latitude'),
-      'longitude' => $this->request->getPost('longitude'),
-      'status' => 'Active',
-      'mac' => $this->request->getPost('mac'),
-      'meta' => $this->request->getPost('meta'),
-      'ipaddress' => $this->request->getPost('ip'),
-      
-    ];
-    $this->deviceModel->insert($data);
-    $response = [
-     'status'   => 200,
-     'error'    => null,
-     'messages' => [
-         'success' => 'Data device berhasil ditambahkan.'
-     ]
-    ];
-    return $this->respondCreated($response);
-   //  return redirect()->to('/device');
+      if(!$this->validate([
+        'device_name' => [
+            'rules' => 'required|min_length[4]|max_length[20]|is_unique[datadevice.nama_device]',
+            'errors' => [
+                'required' => '{field} Harus diisi',
+                'is_unique' => 'Nama Device sudah digunakan sebelumnya'
+            ]
+        ],
+        'meta' => [
+            'rules' => 'required|min_length[4]|max_length[20]|is_unique[datadevice.meta]',
+            'errors' => [
+                'required' => '{field} Harus diisi',
+                'min_length' => '{field} Minimal 4 Karakter',
+                'max_length' => '{field} Maksimal 20 Karakter',
+                'is_unique' => 'nama meta sudah digunakan sebelumnya'
+            ]
+        ],
+    
+    ])) {
+      session()->setFlashdata('error', $this->validator->listErrors());
+      return redirect()->back()->withInput();   
+     }
+      else{
+
+      $data = [
+       'nama' => $this->request->getPost('device_name'),
+       'brand' => $this->request->getPost('device_brand'),
+       'tipekoneksi' => $this->request->getPost('device_connectivity'),
+       'latitude' => $this->request->getPost('latitude'),
+       'longitude' => $this->request->getPost('longitude'),
+       'status' => 'Active',
+       'mac' => $this->request->getPost('mac'),
+       'meta' => $this->request->getPost('meta'),
+       'ipaddress' => $this->request->getPost('ip'),
+       
+     ];
+     $this->deviceModel->insert($data);
+     $response = [
+      'status'   => 200,
+      'error'    => null,
+      'messages' => [
+          'success' => 'Data device berhasil ditambahkan.'
+      ]
+     ];
+     return $this->respondCreated($response);
+    //  return redirect()->to('/device');
+    }
     }
    
    

@@ -53,6 +53,8 @@ $routes->resource("user");
 $routes->get('/api/getlastdata','Antares::getData');
 $routes->post('/api/getall','Antares::getall');
 $routes->post('/api/storedata','Antares::executeaction');
+
+$routes->get('/api/getDataByDevice/(:any)','Antares::getDataByDevice/$1');
 /*
  * --------------------------------------------------------------------
  * Route Definitions

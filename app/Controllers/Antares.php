@@ -13,6 +13,7 @@ class Antares extends ResourceController
     protected $ACCESSKEY;
     protected $DEVICECONTROL;
     protected $URL;
+    protected $URLS;
     protected $PORT;
     protected $APPNAME;
     protected $DEVICENAME;
@@ -25,10 +26,11 @@ class Antares extends ResourceController
         $this->client = \Config\Services::curlrequest();
         $this->DEVICECONTROL = new Devicecontrol();
         $this->ACCESSKEY = getenv('antares.ACCESSKEY');
-        $this->PORT = getenv('antares.PORT');
-        $this->APPNAME = getenv('antares.APPNAME');
+        $this->PORT = 8443;
+        $this->APPNAME = "smartpjuv1";
         $this->DEVICENAME = getenv('antares.DEVICENAME');
-        $this->URL = getenv('antares.URLS').":".$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
+        $this->URL = getenv('antares.URL').$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
+        $this->URLS =getenv('antares.URL').$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/";
     }
     public function getall(){
         $dataSource  = [
@@ -49,17 +51,50 @@ class Antares extends ResourceController
 		];
 		
 		$response = $this->client->request('GET',$this->URL."/la",['headers' => $headers,'user_agent' => 'Mozilla/5.0']);
-        return $response;
+    return $response;
+    }
+    public function getDataByDevice($devicename = null)
+    {
+  
+      if($devicename == null){
+          $msg = [
+            "Status Code" => 500,
+            "Message" =>[
+              "error" => "Set your Device Name !"
+            ],
+          ];
+         return $this->respondCreated($msg);
+        }else{
+          $headers = [
+          'X-M2M-Origin' => $this->ACCESSKEY,
+          'Content-Type' => 'application/json'
+        ];
+        
+        $response = $this->client->request('GET',$this->URLS.$devicename."/la",['headers' => $headers,'user_agent' => 'Chrome/5.0']);
+            return $response;
+        }
+      
     }
     // Only POST method copied from Antares PHP Library;
     public function executeaction($resourceType = 4){
         $port = $this->request->getJsonVar('port');
         $state = $this->request->getJsonVar('state');
-        $data = '{
+        $mode = $this->request->getVar('mode');
+        $started_at = $this->request->getVar('started_at');
+        $ended_at = $this->request->getVar('ended_at');
+        if($mode == "auto"){
+          $data = '{
             "m2m:cin": {
-              "con": "{\"mode\":manual, \"state\":'.$state.', \"port\":'.$port.'}"
+              "con": "{\"mode\":auto, \"started_at\":'.$started_at.', \"ended_at\":'.$ended_at.'}"
             }
           }';
+        }else{
+          $data = '{
+              "m2m:cin": {
+                "con": "{\"mode\":manual, \"state\":'.$state.', \"port\":'.$port.'}"
+              }
+            }';
+        }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->URL);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
