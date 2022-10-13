@@ -237,7 +237,7 @@ $this->section('content');
         <!-- End Title -->
         <div class="chart">
         <canvas
-        id="Chart2"
+        id="Chart1"
         style="width: 100%; height: 400px"
         ></canvas>
     </div>
@@ -254,7 +254,7 @@ $this->section('content');
                
                 </div>
                 <!-- End Title -->
-                <div id="googleMap" style="width: 100%;height:100%;"></div>
+	<div id="googleMap" style="width:100%;height:800px;"></div>
             <!-- End Chart -->
         </div>
         </div>             
@@ -526,10 +526,10 @@ $this->section('content');
 
 function myMap(){
     var mapProp= {
-        center: new google.maps.LatLng("-8.744289207670658", "115.19216935459264"),  
+      center:new google.maps.LatLng(-8.785502,115.199806),
         zoom:14,
         disableDefaultUI: true,
-        // mapTypeId: google.maps.MapTypeId.SATELLITE,
+        mapTypeId: google.maps.MapTypeId.SATELLITE,
     };
     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     // map.setTilt(45);

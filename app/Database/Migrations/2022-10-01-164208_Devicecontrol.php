@@ -44,12 +44,20 @@ class Devicecontrol extends Migration
                 'unsigned'       => true,
 
             ],
-            
-        
+            'datalampu_id' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned'       => true,
+            ],
+            'port' => [
+                'type' => 'ENUM',
+                'constraint' => ["PORT1","PORT2","PORT3","PORT4"],
+            ],
             'created_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
             'updated_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
         ]);
         $this->forge->addForeignKey('datadevice_id','datadevice','id','CASCADE','CASCADE');
+        $this->forge->addForeignKey('datalampu_id','datalampu','id','CASCADE','CASCADE');
         $this->forge->addKey('id', true);
         $this->forge->createTable('devicecontrol');
     }

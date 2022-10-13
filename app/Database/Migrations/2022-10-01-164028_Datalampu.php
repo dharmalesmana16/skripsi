@@ -44,6 +44,10 @@ class Datalampu extends Migration
                 'unsigned'       => true,
 
             ],
+            'meta' => [
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+            ],
             
         
             'created_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
