@@ -7,7 +7,9 @@ use CodeIgniter\Model;
 class Datadevice extends Model
 {
     protected $table            = 'datadevice';
-    protected $allowedFields    = ['nama_device','brand','tipekoneksi','status','ipaddress','mac','meta','gambar','craeted_at','updated_at'];
+    protected $allowedFields    = ['nama_device','brand','tipekoneksi',
+    'status','longitude','latitude','ipaddress','mac','meta','gambar',
+    'created_at','updated_at'];
 
     // Dates
     protected $useTimestamps = true;

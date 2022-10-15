@@ -254,7 +254,7 @@ $this->section('content');
                
                 </div>
                 <!-- End Title -->
-	<div id="googleMap" style="width:100%;height:800px;"></div>
+	<div id="maps" style="width:100%;height:400px;"></div>
             <!-- End Chart -->
         </div>
         </div>             
@@ -526,12 +526,12 @@ $this->section('content');
 
 function myMap(){
     var mapProp= {
-      center:new google.maps.LatLng(-8.785502,115.199806),
+        center:new google.maps.LatLng(-8.785502,115.199806),
         zoom:14,
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.SATELLITE,
     };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    var map = new google.maps.Map(document.getElementById("maps"),mapProp);
     // map.setTilt(45);
 
     var lokasi = new google.maps.LatLng(-8.661862089940081, 115.19748188518464);

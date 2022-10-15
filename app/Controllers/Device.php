@@ -40,39 +40,17 @@ class Device extends ResourceController
     }
 
     public function create(){
-      if(!$this->validate([
-        'device_name' => [
-            'rules' => 'required|min_length[4]|max_length[20]|is_unique[datadevice.nama_device]',
-            'errors' => [
-                'required' => '{field} Harus diisi',
-                'is_unique' => 'Nama Device sudah digunakan sebelumnya'
-            ]
-        ],
-        'meta' => [
-            'rules' => 'required|min_length[4]|max_length[20]|is_unique[datadevice.meta]',
-            'errors' => [
-                'required' => '{field} Harus diisi',
-                'min_length' => '{field} Minimal 4 Karakter',
-                'max_length' => '{field} Maksimal 20 Karakter',
-                'is_unique' => 'nama meta sudah digunakan sebelumnya'
-            ]
-        ],
     
-    ])) {
-      session()->setFlashdata('error', $this->validator->listErrors());
-      return redirect()->back()->withInput();   
-     }
-      else{
 
       $data = [
-       'nama' => $this->request->getPost('device_name'),
+       'nama_device' => $this->request->getPost('device_name'),
        'brand' => $this->request->getPost('device_brand'),
        'tipekoneksi' => $this->request->getPost('device_connectivity'),
        'latitude' => $this->request->getPost('latitude'),
        'longitude' => $this->request->getPost('longitude'),
        'status' => 'Active',
        'mac' => $this->request->getPost('mac'),
-       'meta' => $this->request->getPost('meta'),
+       'meta' => strtolower($this->request->getPost('device_name')),
        'ipaddress' => $this->request->getPost('ip'),
        
      ];
@@ -86,7 +64,7 @@ class Device extends ResourceController
      ];
      return $this->respondCreated($response);
     //  return redirect()->to('/device');
-    }
+    
     }
    
    
@@ -102,29 +80,23 @@ class Device extends ResourceController
        ];
        echo json_encode($msg);
      }
-    //  $response = [
-    //    'devicename' => $datadevice['nama_device'],
-    //    'devicebrand' => $datadevice['brand'],
-    //    'deviceip' => $datadevice['ipaddress'],
-    //    'deviceconnectivity' => $datadevice['tipekoneksi'],
-    //    'deviceloc' => $datadevice['latitude'].",".$datadevice['longitude'],
-    //  ];
-    //  return $this->respondCreated($response);
+   
     }
     public function update($id = null){
      $id = $this->request->getPost('id');
      $data = [
        'id' => $this->request->getPost('id'),
-       'nama' => $this->request->getPost('device_name'),
+       'nama_device' => $this->request->getPost('device_name'),
        'brand' => $this->request->getPost('device_brand'),
        'tipekoneksi' => $this->request->getPost('device_connectivity'),
        'latitude' => $this->request->getPost('latitude'),
        'longitude' => $this->request->getPost('longitude'),
        'status' => 'Active',
+       'meta' => strtolower($this->request->getPost('device_name')),
        'mac' => $this->request->getPost('mac'),
        'ipaddress' => $this->request->getPost('ip'),
      ];
-     $this->deviceModel->update($id,$data);
+     $this->deviceModel->save($data);
      $response = [
        'status'   => 200,
        'error'    => null,
@@ -146,7 +118,7 @@ class Device extends ResourceController
            'status'   => 200,
            'error'    => null,
            'messages' => [
-               'success' => 'Data produk berhasil dihapus.'
+               'success' => 'Data device berhasil dihapus.'
            ],
        ];
        }else{
@@ -154,7 +126,7 @@ class Device extends ResourceController
            'status'   => 500,
            'error'    => null,
            'messages' => [
-               'success' => 'Data Produk Gagal Dihapus !'
+               'success' => 'Data Device Gagal Dihapus !'
            ],
        ];
        }

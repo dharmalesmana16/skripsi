@@ -22,9 +22,16 @@ class Datasuhu extends Migration
                 'type' => 'FLOAT'
 
             ],
+            'device_id' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned'       => true,
+            ],
             'created_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
             'updated_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
         ]);
+        $this->forge->addForeignKey('device_id','datadevice','id','CASCADE','CASCADE');
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('datasuhu');
     }

@@ -27,7 +27,7 @@ class Antares extends ResourceController
         $this->DEVICECONTROL = new Devicecontrol();
         $this->ACCESSKEY = getenv('antares.ACCESSKEY');
         $this->PORT = 8443;
-        $this->APPNAME = "smartpjuv1";
+        $this->APPNAME = getenv('antares.ACCESSKEY');
         $this->DEVICENAME = getenv('antares.DEVICENAME');
         $this->URL = getenv('antares.URL').$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
         $this->URLS =getenv('antares.URL').$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/";

@@ -165,12 +165,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
         success: function() {
         Swal.fire({
         icon: 'success',  
-        title: 'Data User Berhasil Dihapus !',
+        title: 'New Device Has been Recorded !',
         showConfirmButton: false
           });                                               
           setTimeout(function(){// wait for 1 secs(2)
                 window.location = '/device'; // then reload the page.(3)
-            }, 1000); 
+            }, 3000); 
         }
     });
     })

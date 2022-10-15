@@ -7,9 +7,11 @@ use App\Models\Datadevice;
 class Menudevice extends BaseController
 {
     protected $datadevice;
+    protected $OS;
     public function __construct()
     {
         $this->datadevice = new Datadevice();
+        $this->OS = "";
     }
     # code...
     
@@ -30,8 +32,23 @@ class Menudevice extends BaseController
     //     }
     //  }
     public function index($datadevice = null){
-        function pings($host){
-            $str = exec("ping -w 10 -n 1 $host", $input, $result);
+    
+        function ping_ip($host){
+            // $method = "";
+            // if($this->OS == "WINDOWS"){
+            //     $method = "n";
+            // }else{
+
+            // }
+            $os = strtoupper(substr(PHP_OS, 0, 3));
+
+            $cmd = sprintf('ping -w %d -%s %d %s',
+            10,
+            $os === 'WIN' ? 'n' : 'c',
+            2,
+            escapeshellarg($host)
+            );
+            $str = exec($cmd, $input, $result);
             // $array = explode("/", end(explode("=", $str )) );
             if ($result === 0){
                 return '<span class="text-success"> Active </span><br>';
@@ -87,7 +104,7 @@ class Menudevice extends BaseController
     "dataLamp" => $dataControlled,
     "macDevice" => $macDevice,
     "ipDevice" => $ipDevice,
-    "statusDevice" => pings($ipDevice),
+    "statusDevice" => ping_ip($ipDevice),
     "packetTime" => ping($ipDevice),
     "controlledLamp"=>$controlledLamp,
     

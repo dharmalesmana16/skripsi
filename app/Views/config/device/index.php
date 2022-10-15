@@ -173,7 +173,7 @@
                   success: function() {
                   Swal.fire({
                   icon: 'success',
-                  title: 'New Device has Recorded !',
+                  title: 'Remove Device is Successfully !',
                   showConfirmButton: false
                     });                                               
                     setTimeout(function(){// wait for 1 secs(2)

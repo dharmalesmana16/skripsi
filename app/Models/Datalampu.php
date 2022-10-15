@@ -7,7 +7,8 @@ use CodeIgniter\Model;
 class Datalampu extends Model
 {
     protected $table            = 'datalampu';
-    protected $allowedFields    = ['nama_lampu','brand','status','type','device_id','created_at','updated_at'];
+    protected $allowedFields    = ['nama_lampu','brand','status','type',
+    'device_id','created_at','updated_at'];
 
     // Dates
     protected $useTimestamps = true;

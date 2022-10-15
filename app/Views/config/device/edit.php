@@ -9,7 +9,7 @@
 <div class="card-body">
 <form action="/device/<?= $dataDevice['id'] ?>" method="POST">
 <?= csrf_field() ?>
-<input type="hidden" name="_method" value="PUT" />
+<input type="hidden" name="_method" value="PUT">
 <input type="hidden" name="id" value="<?= $dataDevice['id'] ?>">
 <div class="row mb-3">
 	<label for="device_name" class="col-sm-2 col-form-label" >Device Name</label>
