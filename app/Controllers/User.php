@@ -92,7 +92,7 @@ class User extends ResourceController
 		'status'   => 200,
 		'error'    => null,
 		'messages' => [
-			'success' => 'Data produk berhasil ditambahkan.'
+			'success' => 'Data user berhasil ditambahkan.'
 		]
 	  ];
 	   $result = $this->respondCreated($response);

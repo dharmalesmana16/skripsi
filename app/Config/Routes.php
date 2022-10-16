@@ -50,11 +50,18 @@ foreach ($result_metalampu as $devices){
 $routes->resource("device");
 $routes->resource("user");
 
-$routes->get('/api/getlastdata','Antares::getData');
-$routes->post('/api/getall','Antares::getall');
+// $routes->get('/api/getlastdata','Antares::getData');
+// $routes->post('/api/getall','Antares::getall');
 $routes->post('/api/storedata','Antares::executeaction');
+$routes->get('/api/getdata/(:any)','Antares::getDataByDevice/$1');
 
-$routes->get('/api/getDataByDevice/(:any)','Antares::getDataByDevice/$1');
+
+// Auth
+
+$routes->get('/signin','Auth::login');
+$routes->get('/signup','Auth::registrasi');
+$routes->post('/authsignin','Auth::authlogin');
+$routes->post('/signup','Auth::authregistrasi');
 /*
  * --------------------------------------------------------------------
  * Route Definitions

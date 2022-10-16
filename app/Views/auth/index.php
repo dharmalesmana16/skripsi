@@ -12,10 +12,14 @@
 
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <!-- Style -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
 
-    <title>Login NS2 | Anemometer</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
+    <!-- Style -->
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <title>Signin IoT Smart PJU</title>
   </head>
   <body>
   
@@ -28,22 +32,27 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <div class="text-center">
-            <img src="/images/Nuansa-logo-warna.png" class="img-fluid" alt="Responsive image" srcset="" width="">
             <!-- <div class="alert alert-primary" role="alert"> -->
-            <?php
+        <?php
     if(session()->getFlashData('pending')){
     ?>
         <div class="alert alert-danger" role="alert">
         <?= session()->getFlashData('pending') ?>
-      </div>
+        </div>
+    <?php
+    }elseif(session()->getFlashData('error')) {
+    ?>
+        <div class="alert alert-danger" role="alert">
+          <?= session()->getFlashData('error') ?>
+        </div>
     <?php
     }
     ?>
           <!-- </div> -->
-            <p>This is an IoT Product Nuansa Inti Persada named NS2 Anemometer V1</p>
             </div>
-            <form action="<?= base_url('/authlogin'); ?>" method="post">
-              <div class="form-group first">
+            <form action="<?= base_url('/authsignin'); ?>" id="auth" method="post">
+            <?= csrf_field() ?>
+                          <div class="form-group first">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" placeholder="Your username" name="username" id="username" value=<?php echo 'a'; ?> > 
               </div>
@@ -52,22 +61,23 @@
                 <input type="password" class="form-control" placeholder="Your Password" name="password" id="password">
               </div>
               
-              <div class="d-flex mb-5 align-items-center">
+              <div class="d-flex justify-content-between ml-auto mb-5">
                 <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
                   <input type="checkbox" checked="checked" name="rememberme" />
                   <div class="control__indicator"></div>
                 </label>
-                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                      
+                <a href="<?= base_url('/forgotpassword'); ?>" class="forgot-pass">Forgot Password</a>
               </div>
-            <div class="d-grip gap-2">
-
-              <button type="submit" class="btn btn-md btn-primary btnlogin">Login</button>
-            </div>
+              <div class="d-grid gap-2 col-12 mx-auto">
+            <button type="submit" class="btn btn-primary" type="button">Sign In</button>
+          </div>
 
             </form>
             <div class="text-center">
 
-              <p class="fw-normal mt-3"><i class="fa fa-copyright" aria-hidden="true"></i> Nuansa Inti Persada <?php echo date('Y')?></p>
+              <p class="fw-normal mt-3">Developed By : Dharma Lesmana </p>
+              <p class="fw-normal "><i class="fa fa-copyright" aria-hidden="true"></i> Smart PJU <?php echo date('Y')?></p>
             </div>
 
           </div>
@@ -78,66 +88,51 @@
     
   </div>
     <script>
-      $('.btnlogin').submit(function(e){
-        e.preventDefault();
-        Swal.fire({
-          title: 'Apakah Anda Yakin ?',
-          text: "Anda tidak bisa Mengulangi data ini lagi !",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Hapus Data',
-          closeOnConfirm: false,
-
-          closeOnCancel: false
-          })
-      })
-      // $('.btnlogin').submit(function(e){
+      // $(document).ready(function () {
+      //   $('#auth').submit(function(e){
       //     e.preventDefault();
-      //     // var id =  $(this).data('id');
-      //     Swal.fire({
-      //     title: 'Apakah Anda Yakin ?',
-      //     text: "Anda tidak bisa Mengulangi data ini lagi !",
-      //     icon: 'warning',
-      //     showCancelButton: true,
-      //     confirmButtonColor: '#3085d6',
-      //     cancelButtonColor: '#d33',
-      //     confirmButtonText: 'Hapus Data',
-      //     closeOnConfirm: false,
-
-      //     closeOnCancel: false
-      //     }).then((result) => {
-      //     if (result.isConfirmed) {
+        
+         
       //         $.ajax({
       //             type: 'POST',
       //             url: $(this).attr('action'),
-      //             data: $(this).serialize(),
-      //             success: function() {
+      //             data: $("#auth").serialize(),
+      //             beforeSend: function() {
+      //               Swal.fire({
+      //           title: 'Please Wait !',
+      //           // html: '',// add html attribute if you want or remove
+      //           allowOutsideClick: false,
+      //           showCancelButton: false,
+      //           showConfirmButton: false,
+    
+      //           onBeforeOpen: () => {
+      //               Swal.showLoading()
+      //           },
+      //       });                
+      //     },
+      //             success: function(response) {
       //             Swal.fire({
       //             icon: 'success',
-      //             title: 'Data User Berhasil Dihapus !',
+      //             title: response,
       //             showConfirmButton: false
       //               });                                               
       //               setTimeout(function(){// wait for 1 secs(2)
-      //                     location.reload(); // then reload the page.(3)
-      //                 }, 1000); 
+      //                 window.location = '/'; // then reload the page.(3)
+      //               }, 3000); 
       //             }
-      //         });
+             
               
-      //     }else{
-      //         Swal.fire(
-      //         'Cancelled',
-      //         '',
-      //         'error'
-      //         )
-      //     }
+         
       //     })
       // })
+      // });
+   
     </script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
+    
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
   </body>
 </html>
