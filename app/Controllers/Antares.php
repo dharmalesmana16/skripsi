@@ -27,10 +27,10 @@ class Antares extends ResourceController
         $this->DEVICECONTROL = new Devicecontrol();
         $this->ACCESSKEY = getenv('antares.ACCESSKEY');
         $this->PORT = 8443;
-        $this->APPNAME = getenv('antares.ACCESSKEY');
+        $this->APPNAME = getenv('antares.APPNAME');
         $this->DEVICENAME = getenv('antares.DEVICENAME');
-        $this->URL = getenv('antares.URL').$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
-        $this->URLS =getenv('antares.URL').$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/";
+        $this->URL = getenv('antares.URL').":".$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
+        $this->URLS =getenv('antares.URLS').":".$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/";
     }
     public function getall(){
         $dataSource  = [
@@ -124,9 +124,9 @@ class Antares extends ResourceController
         $msg = [
           "status" => 200,
           "message" => "Success" 
-      
-      ];
-      return $this->response->setJSON($msg);
+        
+        ];
+        return $this->response->setJSON($msg);
         } else {
             $msg = [
                 "status" => 500,

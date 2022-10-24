@@ -16,12 +16,17 @@ class Home extends BaseController
         datalampu.status,datalampu.brand, datalampu.type,datalampu.nama_lampu,devicecontrol.mode,
         devicecontrol.started_at,devicecontrol.ended_at FROM 
         ((devicecontrol INNER JOIN datalampu ON devicecontrol.datalampu_id = datalampu.id) INNER JOIN datadevice 
-        ON devicecontrol.datadevice_id = datadevice.id)");
+        ON devicecontrol.datadevice_id = datadevice.id)");   
+        $queryDevice = $db->query("SELECT datadevice.nama_device,datadevice.status,datasuhu.
+        temp,datasuhu.humi,datasuhu.device_id FROM datasuhu INNER JOIN datadevice ON 
+        datasuhu.device_id = datadevice.id");
         $dataLamp = $query->getResultArray();
+        $dataDevice = $queryDevice->getResultArray();
         $data = [
             "title" => "Page Home",
             "datadevice" => $this->datadevice->getData(),
             "dataLamp" => $dataLamp,
+            "dataDevice" => $dataDevice,
         ];
         return view('home/index',$data);
     }

@@ -49,6 +49,7 @@ foreach ($result_metalampu as $devices){
 } 
 $routes->resource("device");
 $routes->resource("user");
+$routes->resource("lamp");
 
 // $routes->get('/api/getlastdata','Antares::getData');
 // $routes->post('/api/getall','Antares::getall');

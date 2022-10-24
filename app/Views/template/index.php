@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
+    <!-- <link
       rel="shortcut icon"
       href="/images/Nuansa-logo-warna.png"
       type="image/x-icon"
-    />
+    /> -->
     <title><?= $title; ?></title>
 
     <!-- ========== All CSS files linkup ========= -->
@@ -41,9 +41,9 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper overflow-hidden">
       <div class="navbar-logo">
-        <a href="<?= base_Url('/'); ?>">
+        <!-- <a href="<?= base_Url('/'); ?>">
           <img src="/images/Nuansa-logo-warna.png" alt="logo" class="img-fluid" />
-        </a>
+        </a> -->
       </div>
       <nav class="sidebar-nav" >
         <ul class="navMenus">
@@ -83,8 +83,6 @@
               $result = $query->getResultArray();  
               
               foreach ($result as $menulampu):
-                # code...
-      
               ?>
               <li>
                 <a href="<?= base_url('/monitoringlamp'.'/'.$menulampu['meta'])?>"> <?= $menulampu['nama_lampu'] ?> </a>

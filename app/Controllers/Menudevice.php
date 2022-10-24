@@ -34,12 +34,6 @@ class Menudevice extends BaseController
     public function index($datadevice = null){
     
         function ping_ip($host){
-            // $method = "";
-            // if($this->OS == "WINDOWS"){
-            //     $method = "n";
-            // }else{
-
-            // }
             $os = strtoupper(substr(PHP_OS, 0, 3));
 
             $cmd = sprintf('ping -w %d -%s %d %s',

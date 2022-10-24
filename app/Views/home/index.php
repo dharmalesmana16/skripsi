@@ -75,7 +75,7 @@ $this->section('content');
       <h6 class="mb-10">Data</h6>
      
       <div class="table-wrapper table-responsive ">
-        <table class="table table-hover">
+        <table class="table table-hover lamps">
           <thead>
             <tr>
               <th><h6>No</h6></th>
@@ -145,55 +145,49 @@ $this->section('content');
       <h6 class="mb-10">Data</h6>
      
       <div class="table-wrapper table-responsive ">
-        <table class="table table-hover">
+        <table class="table table-hover temps">
           <thead>
             <tr>
               <th><h6>No</h6></th>
               <th><h6>Device</h6></th>
-              <th><h6>Status</h6></th>
               <th><h6>Temperature</h6></th>
               <th><h6>Humidity</h6></th>
-              <th><h6>Cooler Status</h6></th>
-              <th><h6>Action</h6></th>
+              <th><h6>Status</h6></th>
             </tr>
             <!-- end table row-->
           </thead>
           <tbody class="fs-3">
             <?php 
               $no = 1;
-            foreach($dataLamp as $dataLamps):
-				$status = $dataLamps['status'];
-				$retStatus = "";
-				if($status = "NOT ACTIVE"){
-					$retStatus= '<span class="danger-btn status-btn">NOT ACTIVE</span>';
-				}else{
-					$retStatus= '<span class="success-btn status-btn">ACTIVE</span>';
+            foreach($dataDevice as $dataDevices):
+            $status = $dataDevices['status'];
+            $retStatus = "";
+            if($status == "NOT ACTIVE"){
+              $retStatus= '<span class="danger-btn status-btn">NOT ACTIVE</span>';
+            }else{
+              $retStatus= '<span class="success-btn status-btn">ACTIVE</span>';
 
-				}
+            }
             ?>
             <tr>
               <td class="min-width ">
                 <p><?= $no++ ?></p>
               </td>
               <td class="min-width">
-                <p><?= $dataLamps['nama_lampu']; ?></p>
+                <p><?= $dataDevices['nama_device']; ?></p>
               </td>
              
+             
               <td class="min-width">
-                <p><?= $dataLamps['mode']; ?></p>
+                <p><?= $dataDevices['temp']; ?></p>
               </td>
               <td class="min-width">
-                <p><?= $dataLamps['started_at']; ?></p>
+                <p><?= $dataDevices['humi']; ?></p>
               </td>
               <td class="min-width">
-                <p><?= $dataLamps['ended_at']; ?></p>
+                <?= $retStatus; ?>
               </td>
-              <td class="min-width">
-				<?= $retStatus; ?>
-				</td>
-              <td class="min-width">
-                <p><?= $dataLamps['nama_device']; ?></p>
-              </td>
+                  
             
              
 
@@ -262,6 +256,12 @@ $this->section('content');
 </div>
 
 <script>
+   document.addEventListener('DOMContentLoaded', function () {
+                let table = new DataTable('.temps');
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                let table = new DataTable('.lamps');
+            });
      const ctx1 = document.getElementById("Chart1").getContext("2d");
       const chart1 = new Chart(ctx1, {
         // The type of chart we want to create
