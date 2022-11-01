@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.module": "php",
+        "*.php": "php",
+        "*.html": "php",
+        "*.tpp": "cpp"
+    }
+}
