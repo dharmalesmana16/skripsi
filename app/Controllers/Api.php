@@ -3,9 +3,11 @@
 namespace App\Controllers;
 use \CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
+
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\Datalampu;
 use App\Models\Datadevice;
+use App\Models\Datasuhu;
 use App\Models\Devicecontrol;
 class Api extends ResourceController
 {
@@ -20,6 +22,7 @@ class Api extends ResourceController
         $this->deviceModel = new Datadevice();
         $this->deviceControl = new Devicecontrol();
         $this->lampModel = new Datalampu();
+        $this->tempModel = new Datasuhu();
         
     }
     public function executeAction()
@@ -44,10 +47,23 @@ class Api extends ResourceController
     public function getDataEnergy($idDevice = false){
 
     }
-    public function getTemp(){
-        
+    public function getDataTemp(){
+        $data = $this->tempModel->getData();
+        if($data){
+           return $this->respond($data,200);
+        }else{
+           return $this->failNotFound("Data Not Found",500);
+        }
     }
-    public function getTempByDevice($idDevice = false){
+    public function getDataTempByDevice($idDevice = false){
+        $data = $this->tempModel->getData($idDevice);
+        if($data){
+           return $this->respond($data,200);
+        }else{
+           return $this->failNotFound("Data Not Found",500);
+        }
+    }
+    public function lampControlTimer($id = false){
 
     }
 

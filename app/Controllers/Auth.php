@@ -36,7 +36,7 @@ class Auth extends BaseController
 
             session()->set([
              'username'=>$auth['username'],
-             'logged_in'=>TRUE,
+             'logged_in'=>true,
              'role'=>$auth['role'],
              'nama' => $auth['nama_depan']." ".$auth['nama_belakang']
              ]);
@@ -135,6 +135,6 @@ class Auth extends BaseController
        ];
        $this->logModel->insert($data);    
        session()->destroy();
-       return redirect()->to(base_url('/login'));
+       return redirect()->to(base_url('/signin'));
     }
 }

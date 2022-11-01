@@ -17,9 +17,17 @@ class Home extends BaseController
         devicecontrol.started_at,devicecontrol.ended_at FROM 
         ((devicecontrol INNER JOIN datalampu ON devicecontrol.datalampu_id = datalampu.id) INNER JOIN datadevice 
         ON devicecontrol.datadevice_id = datadevice.id)");   
-        $queryDevice = $db->query("SELECT datadevice.nama_device,datadevice.status,datasuhu.
-        temp,datasuhu.humi,datasuhu.device_id FROM datasuhu INNER JOIN datadevice ON 
-        datasuhu.device_id = datadevice.id");
+        // $queryDevice = $db->query("SELECT datadevice.nama_device,datadevice.status,datasuhu.
+        // temp,datasuhu.humi,datasuhu.device_id,datasuhu.id,day(datasuhu.created_at) FROM datasuhu INNER JOIN datadevice ON 
+        // datasuhu.device_id = datadevice.id ORDER BY datasuhu.device_id DESC ");
+        // $queryDevice = $db->query("SELECT datadevice.nama_device,datadevice.status,datasuhu.
+        // temp,datasuhu.humi,datasuhu.device_id,datasuhu.id,day(datasuhu.created_at) FROM datasuhu INNER JOIN datadevice ON 
+        // -- datasuhu.device_id = datadevice.id ORDER BY datasuhu.device_id DESC ");
+        // FIX QUERY
+        $queryDevice= $db->query("SELECT datasuhu.*,datadevice.* FROM datasuhu  INNER JOIN datadevice ON datasuhu.device_id = datadevice.id,(select id,device_id,
+        max(created_at) as created_at from datasuhu group by device_id ) max_suhu 
+        WHERE datasuhu.device_id = max_suhu.device_id and datasuhu.created_at 
+        = max_suhu.created_at GROUP BY datasuhu.device_id");
         $dataLamp = $query->getResultArray();
         $dataDevice = $queryDevice->getResultArray();
         $data = [

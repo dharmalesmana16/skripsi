@@ -64,14 +64,12 @@
 			?>
 			
 			
-			<td scope="col">
-				<?= '<label class="switch"><input type="checkbox" data-toggle="toggle" data-size="md" data-onstyle="success"  data-offstyle="danger" onchange="executeAction(this)" port="'.$dataControls["port"].'" name="'.$dataControls["port"].'" id="' . $dataControls["datadevice_id"] . '" ' . $checked . '><span class="slider"></span></label><br>'?>
-			</td>
+			
 			<?php
 			
-			if($dataControls["mode"] == "AUTO"){
-				echo "<script>document.getElementById('{$dataControls['datadevice_id']}').disabled = true;</script>";
-			} 
+			// if($dataControls["mode"] == "AUTO"){
+			// 	echo "<script>document.getElementById('{$dataControls['datadevice_id']}').disabled = true;</script>";
+			// } 
 			?>
 			<td scope="min-width">
 			<?= $dataControls["nama_device"]; ?>
@@ -131,7 +129,7 @@
                             $querydata = $db->query("SELECT nama_device FROM datadevice");
                             // $query = $db->query("SELECT datadevice.id,datadevice.nama_device,devicecontrol.port as port,.devicecontrol.mode as mode,devicecontrol.state,devicecontrol.nama_state,devicecontrol.id as datadevice_id
                             // -- FROM devicecontrol INNER JOIN datadevice ON devicecontrol.datadevice_id = datadevice.id ");
-                            $query = $db->query("SELECT datalampu.id,datalampu.nama_lampu,datadevice.nama_device,devicecontrol.port as port , devicecontrol.mode as mode,devicecontrol.state,devicecontrol.nama_state,devicecontrol.id as datadevice_id
+                            $query = $db->query("SELECT datalampu.id,datalampu.nama_lampu,datadevice.nama_device,devicecontrol.port as port ,devicecontrol.started_at,devicecontrol.ended_at, devicecontrol.mode as mode,devicecontrol.state,devicecontrol.nama_state,devicecontrol.id as datadevice_id
                             FROM ((devicecontrol INNER JOIN datalampu ON devicecontrol.datalampu_id = datalampu.id) INNER JOIN datadevice ON devicecontrol.datadevice_id = datadevice.id) ");
                  
                  
@@ -168,8 +166,8 @@
 
                             <?= $dataControls["mode"]; ?>
                             <div class="text-muted fs-6 fw-light">
-                                 <p>Started At : 18.00</p> 
-                                 <p>Ended At : 18.00</p> 
+                                 <p>Started At : <?= $dataControls["started_at"] ?></p> 
+                                 <p>Ended At : <?= $dataControls["ended_at"] ?></p> 
                             </div>
                         </div>
                         </td>
@@ -193,7 +191,7 @@
                         <div class="d-flex">
                             <div class="action">
                                 <button class="btn btn-md text-primary">
-                                <a href="/user/<?= $dataControls['id'] ?>/edit" >
+                                <a href="/setting/<?= $dataControls['id'] ?>" >
                                     <i class="fa fa-wrench"></i>
                                 </a>
                                 </button>

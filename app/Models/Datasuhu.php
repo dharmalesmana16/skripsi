@@ -13,10 +13,13 @@ class Datasuhu extends Model
     protected $useTimestamps = true;
 
     public function getData($id = false ){
+        $db = \Config\Database::connect();
         if($id === false){
             return $this->findAll();
         }else{
-            return $this->where(['id' => $id])->first();
+        $query = $db->query("SELECT * FROM datasuhu 
+        where device_id = $id ORDER BY id DESC LIMIT 1");
+        return $query->getResultArray();
         }
     }
 }

@@ -24,13 +24,14 @@
     <link rel="stylesheet" type="text/css" href="/css/datatables.min.css"/>
     <link href="/toggle/css/bootstrap4-toggle.min.css" rel="stylesheet">
   <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="/js/gauge/gauge.min.js"></script>
 
   <script src="/js/Chart.min.js"></script>
   <!-- <script src="/js/Chart.js"></script> -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script type="text/javascript" src="/js/datatables.min.js"></script>
-    <script src="/js/gauge.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
@@ -340,6 +341,7 @@
     <!-- ======== main-wrapper end =========== -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ1vBYV-pf6hSYPwvaAcKMD36JWI8MyAY&callback=myMap&v=weekly"></script>
     <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/js/gauge/gauge.min.js"></script>
 
 
     <script type="text/javascript" src="/js/datatables.min.js"></script>

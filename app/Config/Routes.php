@@ -25,10 +25,12 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-$routes->setAutoRoute(true);
-
-$routes->get('/','Home::index');
-
+$routes->setAutoRoute(false);
+$routes->group('signin', ['filter' => 'redauth'], function ($routes) {
+  $routes->get('/', 'Auth::login');
+  $routes->post('/', 'Auth::authlogin');
+});
+$routes->get('/', 'Home::index', ['filter' => 'auth']);
 $db = \Config\Database::connect();
 $query_metadevice = $db->query("SELECT meta FROM datadevice");
 $query_metalampu = $db->query("SELECT meta FROM datalampu");
@@ -57,12 +59,31 @@ $routes->post('/api/storedata','Antares::executeaction');
 $routes->get('/api/getdata/(:any)','Antares::getDataByDevice/$1');
 
 
+
+// API
+$routes->get("/api/getDataTemp","Api::getDataTemp");
+$routes->get("/api/getDataTempByDevice/(:any)","Api::getDataTempByDevice/$1");
+$routes->post("/api/lampControlTimer","Api::lampControlTimer");
+$routes->post("/api/lampControlManual","Api::lampControlManual");
+
 // Auth
 
 $routes->get('/signin','Auth::login');
+$routes->get('/logout','Auth::logout');
 $routes->get('/signup','Auth::registrasi');
 $routes->post('/authsignin','Auth::authlogin');
 $routes->post('/signup','Auth::authregistrasi');
+
+$routes->group('control', ['filter' => 'auth'], function ($routes) {
+  $routes->get('/', 'Control::index');
+});
+$routes->group('setting', ['filter' => 'auth'], function ($routes) {
+  $routes->get('/', 'Control::index');
+});
+
+// $routes->get('/control','Control::index');
+$routes->get('/setting/(:any)','Control::editSetting/$1');
+$routes->post('/setting/(:any)','Control::updateSetting/$1');
 /*
  * --------------------------------------------------------------------
  * Route Definitions

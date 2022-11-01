@@ -85,6 +85,7 @@ class Menudevice extends BaseController
     $idDevice = $menudevice['id'];
     $ipDevice = $menudevice['ipaddress'];
     $macDevice = $menudevice['mac'];
+
     $db = \Config\Database::connect();
     $query= $db->query("SELECT  devicecontrol.datadevice_id,devicecontrol.datalampu_id ,
     datalampu.status,datalampu.brand, datalampu.type,datalampu.nama_lampu,devicecontrol.mode,
@@ -93,6 +94,12 @@ class Menudevice extends BaseController
     ON devicecontrol.datadevice_id = datadevice.id) WHERE devicecontrol.datadevice_id = $idDevice");
     $dataControlled  = $query->getResultArray();
     $controlledLamp = $query->getNumRows();
+    // $uri = service('uri');
+	// $uri = current_url(true);
+	// $path = $uri->getSegment(3);
+	$queryTemp = $db->query("SELECT AVG(datasuhu.temp) as suhu,AVG(datasuhu.humi) as kel,datasuhu.device_id,datadevice.meta,datasuhu.created_at as hari FROM datasuhu 
+	INNER JOIN datadevice ON datasuhu.device_id = datadevice.id WHERE datasuhu.device_id = $idDevice  GROUP BY day(hari)");
+	$result = $queryTemp->getResultArray();
     $data = [
     "title" => $menudevice["nama_device"],
     "dataLamp" => $dataControlled,
@@ -101,6 +108,8 @@ class Menudevice extends BaseController
     "statusDevice" => ping_ip($ipDevice),
     "packetTime" => ping($ipDevice),
     "controlledLamp"=>$controlledLamp,
+    "result"=>$result,
+    "idDevice"=>$idDevice,
     
     ];
      if($menudevice){

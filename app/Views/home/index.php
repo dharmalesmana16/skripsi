@@ -26,48 +26,135 @@ $this->section('content');
 
 
 <div class="row">
+  
 <!-- Bagian KWH -->
 	<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-		<div class="icon-card mb-30">
-			<div class="icon purple">
-				<i class="lni lni-cart-full"></i>
-			</div>
-			<div class="content">
-				<h6 class="mb-10">Device Active</h6>
+		<div class="icon-card mb-30" >
+      <div class="card-body p-2 ">
+        <div class="">
+          <h6 class="mb-10"><i class="lni lni-cart-full"></i>Device Active</h6>
+        </div>
+        <div id="gauge1" class="gauge-container" ></div>
+
 				
-				<div class=" mb-0 fw-bold text-gray-800">IP Add :  
-					<span class="text-sm">192.168.1.10 </span>
-				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-		<div class="icon-card mb-30">
-			<div class="icon purple">
-				<i class="lni lni-cart-full"></i>
-			</div>
-			<div class="content">
-				<h6 class="mb-10">Lamp Active</h6>
-				<div class=" mb-0 fw-bold text-gray-800">IP Add :  
-					<span class="text-sm">192.168.1.10 </span>
-				</div>
+  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+		<div class="icon-card mb-30" >
+      <div class="card-body p-2 ">
+        <div class="">
+          <h6 class="mb-10"><i class="lni lni-cart-full"></i>Lamp Active</h6>
+        </div>
+        <div id="gauge2" class="gauge-container" ></div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-		<div class="icon-card mb-30">
-		<div class="icon purple">
-			<i class="lni lni-cart-full"></i>
-		</div>
-		<div class="content">
-			<h6 class="mb-10">Users</h6>
-			
-			<div class=" mb-0 fw-bold text-gray-800">IP Add :  <span class="text-sm">192.168.1.10 </span></div>
-		</div>
+		<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+		<div class="icon-card mb-30" >
+      <div class="card-body p-2 ">
+        <div class="">
+          <h6 class="mb-10"><i class="lni lni-cart-full"></i>Users</h6>
+        </div>
+        <div id="gauge3" class="gauge-container" ></div>
+
+				
+			</div>
 		</div>
 	</div>
 </div>
+<script>
+   var gaugeDevice = Gauge(
+    document.getElementById("gauge1"),
+    {
+      max: 2,
+      dialStartAngle: -90,
+      dialEndAngle: -90.001,
+      strokeWidth: 5,// The thickness
+      value: 0,
+    //   dialRadius: ,
 
+      label: function(value) {
+        return Math.round(value) + "/" + this.max;
+      },
+      
+      color: function(value){
+        if(value == 0 ){
+            return "#C40D42";
+        }
+        else if(value >= 1 && value < this.max){
+            return "#F7941E";
+        }else{
+            return "#B3D335";
+        }
+      }
+    }
+  );
+  (function loop() {
+      
+
+        
+    gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
+    })();
+    var gaugeDevice = Gauge(
+    document.getElementById("gauge2"),
+    {
+      max: 2,
+      dialStartAngle: -90,
+      dialEndAngle: -90.001,
+      value: 0,
+      label: function(value) {
+        return Math.round(value) + "/" + this.max;
+      },
+      color: function(value){
+        if(value == 0 ){
+            return "#C40D42";
+        }
+        else if(value >= 1 && value < this.max){
+            return "#F7941E";
+        }else{
+            return "#B3D335";
+        }
+      }
+    }
+  );
+  (function loop() {
+      
+
+        
+    gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
+    })();
+    var gaugeDevice = Gauge(
+    document.getElementById("gauge3"),
+    {
+      max: 2,
+      dialStartAngle: -90,
+      dialEndAngle: -90.001,
+      value: 0,
+      label: function(value) {
+        return Math.round(value) + "/" + this.max;
+      },
+      color: function(value){
+        if(value == 0 ){
+            return "#C40D42";
+        }
+        else if(value >= 1 && value < this.max){
+            return "#F7941E";
+        }else{
+            return "#B3D335";
+        }
+      }
+    }
+  );
+  (function loop() {
+      
+
+        
+    gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
+    window.setTimeout(loop, 2000);
+    })();
+
+</script>
 
 <div class="row">
   <div class="col-lg-6">
@@ -150,8 +237,8 @@ $this->section('content');
             <tr>
               <th><h6>No</h6></th>
               <th><h6>Device</h6></th>
-              <th><h6>Temperature</h6></th>
-              <th><h6>Humidity</h6></th>
+              <th class="text-center"><h6>Temperature</h6></th>
+              <th class="text-center"><h6>Humidity</h6></th>
               <th><h6>Status</h6></th>
             </tr>
             <!-- end table row-->
@@ -168,35 +255,42 @@ $this->section('content');
               $retStatus= '<span class="success-btn status-btn">ACTIVE</span>';
 
             }
+            $indicatorTemp ="";
+            if($dataDevices["temp"] > 33){
+              $indicatorTemp = "text-danger";
+            }elseif($dataDevices["temp"] >=30 and $dataDevices["temp"] <= 33 ){
+              $indicatorTemp = "text-warning";
+
+            }
+
+            else {
+            $indicatorTemp = "text-success";
+
+            }
             ?>
             <tr>
               <td class="min-width ">
                 <p><?= $no++ ?></p>
               </td>
               <td class="min-width">
-                <p><?= $dataDevices['nama_device']; ?></p>
+              <p><?= $dataDevices['nama_device']; ?></p>
+
               </td>
-             
-             
-              <td class="min-width">
-                <p><?= $dataDevices['temp']; ?></p>
+                          
+              <td class="min-width text-center">
+                <p class="<?= $indicatorTemp ?> fw-bold"><?= $dataDevices['temp']."°C"; ?></p>
               </td>
-              <td class="min-width">
+              <td class="min-width text-center">
                 <p><?= $dataDevices['humi']; ?></p>
               </td>
               <td class="min-width">
                 <?= $retStatus; ?>
               </td>
-                  
-            
-             
-
             </tr>
             <?php
             endforeach
             ?>
             <!-- end table row -->
-            
           </tbody>
         </table>
         <!-- end table -->
@@ -248,7 +342,7 @@ $this->section('content');
                
                 </div>
                 <!-- End Title -->
-	<div id="maps" style="width:100%;height:400px;"></div>
+	            <div id="maps" style="width:100%;height:400px;"></div>
             <!-- End Chart -->
         </div>
         </div>             

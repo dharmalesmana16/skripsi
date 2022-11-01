@@ -11,7 +11,7 @@ class Control extends BaseController
     {
         $this->datacontrol = new Devicecontrol();
     }
-    public function getIndex()
+    public function index()
     {
         $data = [
             "dataControl" =>$this->datacontrol->getData(),
@@ -19,6 +19,25 @@ class Control extends BaseController
             "title" => "Page Control"
         ];
         return view('controlling/index',$data);
+    }
+    public function editSetting($id){
+        $data = [
+         'title' => "Config Device Mode",
+         'header' => "",
+         'dataDevice' => $this->datacontrol->getData($id)
+         // 'brosurnuansa' => $this->brosur->getBrosurAll()
+       ];
+       return view('controlling/setting/index',$data);
+    }
+    public function updateSetting($id){
+        $data = [
+           "id" => $id,
+           "mode" =>$this->request->getPost("mode"),
+           "started_at" => $this->request->getPost("jam_mulai"),
+           "ended_at" => $this->request->getPost("jam_akhir")
+        ];
+        $this->datacontrol->save($data);
+        return redirect()->to(base_url('/control'));
     }
    
 }

@@ -3,9 +3,68 @@ $this->extend('template/index');
 $this->section('content');
 
 ?>
-<?= $this->include('devicemenus/template/datacard'); ?>
-<?= $this->include('devicemenus/template/table'); ?>
 
+<div class="row">
+<!-- Bagian KWH -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Network Status</h6>
+                 
+                  <div class=" mb-0 fw-bold text-gray-800">IP Add :  <span class="text-sm"><?= $ipDevice; ?></span></div>
+                    <div class=" mb-0 fw-bold text-gray-800">Mac Add : <?= $macDevice; ?> </div>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-dollar"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Controlled Lamp</h6>
+                  <div class="h4 fw-bold text-gray-800 "><?= $controlledLamp; ?></div>
+                    <span></span>
+                   
+                  </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-credit-cards"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Device Temperature</h6>
+                  <div class=" mb-0 fw-bold text-gray-800" id="temp_">Temp : <span class="" id="temp" class=" mb-0 fw-bold text-gray-800" >-</span></div>
+                    <div class="mb-0 fw-bold text-gray-800" id="humi_">Humidity : <span class="" id="humi" class=" mb-0 fw-bold text-gray-800" >-</span></div>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Device Status</h6>
+                    <div class=" mb-0 fw-bold text-gray-800">Status :  <span class="text-sm"><?= $statusDevice; ?> </span></div>
+                    <div class=" mb-0 fw-bold text-gray-800">Packet Time :<?= $packetTime; ?> </div>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+</div>
+<?= $this->include('devicemenus/template/table'); ?>
  <div class="row">
             <div class="col-lg-6">
               <div class="card-style mb-30">
@@ -56,8 +115,7 @@ $this->section('content');
                     <div class="select-style-1">
                       <div class="select-position select-sm">
                         <select class="light-bg">
-                        
-                          <option value="">Weekly</option>
+                          <option value="weekly">Weekly</option>
                         </select>
                       </div>
                     </div>
@@ -77,28 +135,33 @@ $this->section('content');
             <!-- End Col -->
           </div>
 
-
+<?php
+	
+	// echo $path;
+	foreach($result as $dataTemps){
+		// echo $dataTemps["suhu"];
+		$tanggal = date_create($dataTemps["hari"]);
+		$tanggals[] = date_format($tanggal,"d M Y");	
+		$suhu[] = $dataTemps["suhu"];
+		$kel[] = $dataTemps["kel"];
+		// echo $tanggals;
+	}
+  if(count($tanggals) == 8){
+    $removed = array_shift($tanggals);
+    $removed = array_shift($suhu);
+    $removed = array_shift($kel);
+  }
+  // var_dump($tanggals);
+?>
 <script>
-	  const ctx1 = document.getElementById("Chart1").getContext("2d");
+	    const ctx1 = document.getElementById("Chart1").getContext("2d");
       const chart1 = new Chart(ctx1, {
         // The type of chart we want to create
         type: "line", // also try bar or other graph types
-
         // The data for our dataset
         data: {
           labels: [
-            "Jan",
-            "Fab",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
+         
           ],
           // Information about the dataset
           datasets: [
@@ -200,8 +263,8 @@ $this->section('content');
                 },
                 ticks: {
                   padding: 35,
-                  max: 1200,
-                  min: 100,
+                  max: 100,
+                  min: 20,
                 },
               },
             ],
@@ -220,36 +283,27 @@ $this->section('content');
           },
         },
       });
+      // Device temperature and humidity
       const ctx2 = document.getElementById("Chart2").getContext("2d");
-      const chart2 = new Chart(ctx2, {
+	  var dateArrayJS = <?php echo json_encode($tanggals); ?>
+
+	  const chart2 = new Chart(ctx2, {
+		
         // The type of chart we want to create
         type: "line", // also try bar or other graph types
 
         // The data for our dataset
         data: {
-          labels: [
-            "Jan",
-            "Fab",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
+          labels: dateArrayJS,
+          
           // Information about the dataset
           datasets: [
             {
-              label: "",
+              label: "Temp",
               backgroundColor: "transparent",
               borderColor: "#4A6CF7",
-              data: [
-                600, 800, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100,
-              ],
+              data: <?php echo json_encode($suhu);?>,
+              
               pointBackgroundColor: "transparent",
               pointHoverBackgroundColor: "#4A6CF7",
               pointBorderColor: "transparent",
@@ -258,14 +312,15 @@ $this->section('content');
               pointBorderWidth: 5,
               pointRadius: 8,
               pointHoverRadius: 8,
+			  yAxisID: 'y'
+
             },
             {
-              label: "",
+              label: "Humi",
               backgroundColor: "transparent",
               borderColor: "red",
-              data: [
-                400, 435, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100,
-              ],
+			        data: <?php echo json_encode($kel);?>,
+            
               pointBackgroundColor: "transparent",
               pointHoverBackgroundColor: "#4A6CF7",
               pointBorderColor: "transparent",
@@ -274,6 +329,7 @@ $this->section('content');
               pointBorderWidth: 5,
               pointRadius: 8,
               pointHoverRadius: 8,
+			  yAxisID: 'y1'
             }, 
             
            
@@ -319,6 +375,8 @@ $this->section('content');
           scales: {
             yAxes: [
               {
+				id: "y",
+				position:"left",
                 gridLines: {
                   display: false,
                   drawTicks: true,
@@ -326,10 +384,25 @@ $this->section('content');
                 },
                 ticks: {
                   padding: 35,
-                  max: 1200,
-                  min: 100,
+                  max: 100,
+                  min: 20,
                 },
-              },
+              },{
+				id: "y1",
+				position:"right",
+
+                gridLines: {
+                  display: false,
+                  drawTicks: true,
+                  drawBorder: true,
+                },
+                ticks: {
+                  // label:"C",
+                  padding: 35,
+                  max: 100,
+                  min: 20,
+                },
+			  }
             ],
             xAxes: [
               {
@@ -347,10 +420,30 @@ $this->section('content');
         },
       });
 </script>
+
+
+<script>
+  function getDataTemp(){
+  
+
+  $.ajax({
+    type: "GET",
+    url: "<?php echo base_url('/api/getDataTempByDevice')."/".$idDevice?>",
+    // data: "data"
+    dataType: "json",
+    success: function (response) {
+          let temp = response[0]["temp"].toLocaleString();
+          let humi = response[0]["humi"].toLocaleString();
+          document.getElementById("temp").textContent = temp;
+          document.getElementById("humi").textContent = humi;
+          // var tempContent = temp;
+      }
+  });
+  }
+  
+  setInterval(function () {getDataTemp()}, 2000);
+</script>
 <?php
-
-
-
 $this->endSection();
 ?>
 
