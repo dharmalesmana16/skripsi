@@ -257,7 +257,6 @@ void lib::printData() {
 void lib::startMQTTConnection(){
       client.setServer(_mqttServer, _mqttPort);
     //   client.setCallback(); 
-
 }
 
 void lib::connectAPN(){

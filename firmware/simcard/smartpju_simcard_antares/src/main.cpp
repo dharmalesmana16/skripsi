@@ -9,10 +9,10 @@ char* projectName ="smartpjuv1";
 char* deviceName ="smartpju002";
 int hour;
 int minute;
-int startHour;
-int endHour;
-int startMinute; 
-int endMinute;
+int startHour = readStartHour();
+int endHour = readEndHour();
+int startMinute = readStartMinute(); 
+int endMinute = readEndMinute();
 
 float kwh;
 float tegangan; 
@@ -24,11 +24,18 @@ float humi;
 bool manual = false;
 bool Auto = false;
 char msg[300];
-int mode_kontrol = 1;
+int mode_kontrol;
 DHT dht(DHTPIN,DHTTYPE);
 lib mylib(ACCESSKEY);
 RTC_DS3231 rtc;
 PZEM004Tv30 pzemr(&Serial1,RXD1,TXD1);
+
+int port1 = 25;
+int port2 = 26;
+int port3 = 27;
+int modeport1 = readPort1();
+int modeport2 = readPort2();
+int modeport3 = readPort3();
 
 void getPZEMR();
 void getPZEMS();
@@ -42,12 +49,129 @@ void setup() {
   mylib.connectAPN();
   mylib.startMQTTConnection();
   mylib.setCallback(callback);
+  rtc.begin();
+  dht.begin();
   EEPROM.begin(EEPROMSIZE);
-
+  if(modeport1 == 1){
+    digitalWrite(port1,HIGH);
+  }else{
+    digitalWrite(port1,LOW);
+  }
+  if(modeport2 == 1){
+    digitalWrite(port2,HIGH);
+  }else{
+    digitalWrite(port2,LOW);
+  }
+    if(modeport3 == 1){
+    digitalWrite(port3,HIGH);
+  }else{
+    digitalWrite(port3,LOW);
+  }
+  if(mode_kontrol = 1 ){
+    Auto = true;
+  }else{
+    Auto = false;
+  }
 }
 
 void loop() {
-int kwh = random(25,30);
+  if(mode_kontrol = 1 ){
+    Auto = true;
+  }else{
+    Auto = false;
+  }
+ if(Auto){
+   if(startHour>endHour){
+      Serial.println("Next Day");
+      if(hour>=startHour){
+        if(minute>=startMinute){
+          digitalWrite(modeport1,HIGH);
+          digitalWrite(modeport2,HIGH);
+          digitalWrite(modeport3,HIGH);
+          Serial.println("LAMP PORT 1 , PORT 2 ,PORT 3: MODE ON");
+        }
+      }else if(hour-12>=endHour){
+        if(minute>=endMinute){
+          digitalWrite(modeport1,LOW);
+          digitalWrite(modeport2,LOW);
+          digitalWrite(modeport3,LOW);
+          Serial.println("LAMP PORT 1 , PORT 2 ,PORT 3: MODE OFF");
+        }
+      }else{
+          digitalWrite(modeport1,LOW);
+          digitalWrite(modeport2,LOW);
+          digitalWrite(modeport3,LOW);
+          Serial.println("LAMP PORT 1 , PORT 2 ,PORT 3: MODE OFF");
+      }  
+    }
+    //ketika jam mulai sama dengan jam akhir maka logikanya bermain di menit
+    else if (startHour==endHour){
+      Serial.println("1JAM");
+      if(hour==startHour){
+        if (minute>=startMinute && minute<endMinute){
+          digitalWrite(modeport1,HIGH);
+          digitalWrite(modeport2,HIGH);
+          digitalWrite(modeport3,HIGH);
+          Serial.println("LAMP PORT 1 , PORT 2 ,PORT 3: MODE ON");
+        }
+        else if (minute>=endMinute){
+          digitalWrite(modeport1,LOW);
+          digitalWrite(modeport2,LOW);
+          digitalWrite(modeport3,LOW);          
+          Serial.println("LAMP PORT 1 , PORT 2 ,PORT 3: MODE OFF");
+        }
+      }else{
+          digitalWrite(modeport1,LOW);
+          digitalWrite(modeport2,LOW);
+          digitalWrite(modeport3,LOW);        
+          Serial.println("LAMP PORT 1 , PORT 2 ,PORT 3: MODE OFF");
+      }
+    }
+    //Ketika jam mulai kurang dari jam akhir maka dikatakan hari masih hari yang sama 
+    else if(startHour<endHour){
+      Serial.println("SameDay");
+      if(hour>=startHour && hour<=endHour){
+        if(minute>=startMinute){ // mau di improve dengan startMinute >= minute
+          digitalWrite(modeport1,HIGH);
+          digitalWrite(modeport2,HIGH);
+          digitalWrite(modeport3,HIGH);
+          Serial.println("Lamp: ON");
+        }
+      }else if (hour>=endHour){
+        if(minute>endMinute){
+          digitalWrite(modeport1,LOW);
+          digitalWrite(modeport2,LOW);
+          digitalWrite(modeport3,LOW);         
+          Serial.println("Lamp: OFF");
+        }
+      }else{
+          digitalWrite(modeport1,LOW);
+          digitalWrite(modeport2,LOW);
+          digitalWrite(modeport3,LOW);         
+          Serial.println("Lamp: OFF");
+      }
+    }
+    }else{
+    if(modeport1 == 1){
+      digitalWrite(port1,HIGH);
+    }else{
+      digitalWrite(port1,LOW);
+
+    }
+    
+    if(modeport2 == 1){
+      digitalWrite(port2,HIGH);
+    }else{
+      digitalWrite(port2,LOW);
+    }
+      if(modeport3 == 1){
+      digitalWrite(port3,HIGH);
+    }else{
+      digitalWrite(port3,LOW);
+
+    }
+  }
+  int kwh = random(25,30);
   int daya = random(25,30);
   int arus = random(25,30);
   int tegangan = random(25,30); 
@@ -57,7 +181,6 @@ int kwh = random(25,30);
   // DateTime now = rtc.now();
   // hour = now.hour();
   // minute = now.minute();
-
   int temp = random(25,40) ;
   int hum = random(90,95);
   // float windsp = 2.0;
@@ -81,15 +204,10 @@ int kwh = random(25,30);
   mylib.add("daya_t", daya);
   mylib.add("volt_t", tegangan);
   mylib.add("current_t", arus);
- 
-  // mylib.add("kwh_s", rainlv);
-
-
   mylib.add("latitude", lat);
   mylib.add("longitude", lon);
-  // Serial.println("Terkirim !");
   mylib.publish(projectName, deviceName);
-  Serial.println("Terkirim !");
+  Serial.println("Sent Succesfully !");
   delay(500);
   }
 void getPZEMR(){
@@ -133,7 +251,7 @@ void getPZEMT(){
 void temphumi(){
   // temp = dht.readTemperature();
   // humi = dht.readHumidity();
-   int temp = random(25,30) ;
+  int temp = random(25,30) ;
   int humi = random(75,90);
  
 }
@@ -149,57 +267,48 @@ void callback(char topic[], byte payload[], unsigned int length) {
   String state = mylib.getString("state");
   String port = mylib.getString("port");
   if(mode == "manual"){
+    Auto = false;
+    mode_kontrol = 0;
+    writeMode(mode_kontrol);
     if(port == "PORT1"){
       if(state == "ON"){
-
-      manual = true;
+      modeport1 = 1;
       Auto = false;
       int mode_kontrol = 0;
-      writeMode(mode_kontrol);
-      digitalWrite(25,HIGH); 
+      writePort1(modeport1);
+      digitalWrite(port1,HIGH); 
       }else{
-        manual = true;
-        Auto = false;
-        int mode_kontrol = 0;
-        writeMode(mode_kontrol);
-        digitalWrite(25,LOW); 
+        modeport1 = 0;
+        writePort1(modeport1);
+        digitalWrite(port1,LOW); 
       }
 
     }else if(port == "PORT2"){
       if(state == "ON"){
 
-      manual = true;
-      Auto = false;
-      int mode_kontrol = 0;
-      writeMode(mode_kontrol);
-      digitalWrite(26,HIGH); 
+      modeport2 = 1;
+      writePort2(modeport2);
+      digitalWrite(port2,HIGH); 
       }else{
-        manual = true;
-        Auto = false;
-        int mode_kontrol = 0;
-        writeMode(mode_kontrol);
-        digitalWrite(26,LOW); 
+        manual = 0;
+        writePort2(modeport2);
+        digitalWrite(port2,LOW); 
       }
      
     }else if(port == "PORT3"){
       if(state == "ON"){
 
-      manual = true;
-      Auto = false;
-      int mode_kontrol = 0;
-      writeMode(mode_kontrol);
-      digitalWrite(27,HIGH); 
+      modeport3 = 1;
+      writePort3(modeport3);
+      digitalWrite(port3,HIGH); 
       }else{
-        manual = true;
-        Auto = false;
-        int mode_kontrol = 0;
-        writeMode(mode_kontrol);
-        digitalWrite(27,LOW); 
+        modeport3 = 0;
+        writePort3(modeport3);
+        digitalWrite(port3,LOW); 
       }
      
     }
   }else{
-
     String waktuMulai = String(mylib.getInt("started_at"));
     String waktuAkhir = String(mylib.getInt("ended_at"));
     int startHour = hourGet(waktuMulai);

@@ -22,9 +22,23 @@ void writeMode(int &value){
     EEPROM.write(4,value);
     EEPROM.commit();
 }
+void writePort1(int &value){
+    EEPROM.write(5,value);
+    EEPROM.commit();
+}
+void writePort2(int &value){
+    EEPROM.write(6,value);
+    EEPROM.commit();
+}
+void writePort3(int &value){
+    EEPROM.write(7,value);
+    EEPROM.commit();
+}
 //=============================
 
 //=========READING=============
+
+
 int readStartHour(){
     int StartH = EEPROM.read(0);
     return StartH;
@@ -43,6 +57,18 @@ int readEndMinute(){
 }
 int readMode(){
     int Mode = EEPROM.read(4);
+    return Mode;
+}
+int readPort1(){
+    int Mode = EEPROM.read(5);
+    return Mode;
+}
+int readPort2(){
+    int Mode = EEPROM.read(6);
+    return Mode;
+}
+int readPort3(){
+    int Mode = EEPROM.read(7);
     return Mode;
 }
 //============================
