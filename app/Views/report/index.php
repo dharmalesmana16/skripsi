@@ -6,14 +6,11 @@ $this->section('content');
 
 <div class="row">
     <div class="col-lg-12 col-md-12 ">
-        <div class="card shadow mb-4">
-        <!-- Card Header (Judul) -->
-		
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Data
-            </div>
-		
+        <div class="card-style shadow mb-4">
+     			<div class="left">
+				
+                    <h6 class="text-medium mb-10 fw-bold">Report</h6>
+                  </div>
         <!-- Card Body -->
             <div class="card-body">
 				<form id="search" action="/api/alldata" method="post" class="search" >

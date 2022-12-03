@@ -29,19 +29,19 @@ class Antares extends ResourceController
         $this->PORT = 8443;
         $this->APPNAME = getenv('antares.APPNAME');
         $this->DEVICENAME = getenv('antares.DEVICENAME');
-        $this->URL = getenv('antares.URL').":".$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
+        $this->URL = getenv('antares.URLS').":".$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/".$this->DEVICENAME;
         $this->URLS =getenv('antares.URLS').":".$this->PORT."/~/antares-cse/antares-id/".$this->APPNAME."/";
     }
     public function getall(){
-        $dataSource  = [
-            "id" =>$this->request->getJsonVar('id'),
-            "mode" =>$this->request->getJsonVar('mode'),
-            "state" =>$this->request->getJsonVar('state'),
-            "port" =>$this->request->getJsonVar('port'),
-        ];  
+        // $dataSource  = [
+        //     "id" =>$this->request->getJsonVar('id'),
+        //     "mode" =>$this->request->getJsonVar('mode'),
+        //     "state" =>$this->request->getJsonVar('state'),
+        //     "port" =>$this->request->getJsonVar('port'),
+        // ];  
         // $dataport = $this->request
         // $dataSource = $this->request->getJSON();
-        return $this->response->setJSON($dataSource);
+       return $this->URL;
     }
     public function getData()
     {

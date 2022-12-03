@@ -31,7 +31,10 @@ class Menumonitoring extends BaseController
     //  }
     public function index($datalampu = null){
      $menulampu = $this->Datalampu->where(['meta' => $datalampu])->first();
-     $data = ["title" => "Monitoring ".$menulampu["nama_lampu"]];
+     $data = [
+        "title" => "Monitoring ".$menulampu["nama_lampu"],
+        "idLamp" => $menulampu["id"],
+    ];
      if($menulampu){
          return view('monitoringmenus/'.$menulampu['meta'],$data);
      }else{

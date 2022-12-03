@@ -4,10 +4,11 @@ $this->section('content');
 
 ?>
 
-<div class="card">
-    <div class="card-header">
-        System Log
-    </div>
+<div class="card-style">
+            <div class="left">
+                    <h6 class="text-medium mb-10 fw-bold">System Log</h6>
+                  </div>
+                  
     <div class="card-body">
 
   
@@ -19,7 +20,6 @@ $this->section('content');
                                 <th scope="" >ACTION</th>
                                 <th scope="" >DATE & TIME</th>
                             </tr>
-
                         </thead>
                         <tbody>
                         <?php

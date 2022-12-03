@@ -6,6 +6,7 @@
 <?php
 
 ?>
+<a href="<?= base_url('/control/new')?>" class="main-btn primary-btn btn-sm btn-hover rounded-md fw-bold mb-20">Create New Control + </a>
 <div class="row">
 	<div class="col-lg-12">
 	<div class="card-style mb-30">
@@ -227,7 +228,7 @@
               data: '{"id":"'+id+'","mode":"MANUAL","state":"ON","port":"'+port+'"}',
               dataType: "json",
               success: function (response) {
-                // console.log(response);
+                console.log(response);  
 
               }
             });

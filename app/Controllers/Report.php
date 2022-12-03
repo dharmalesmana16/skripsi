@@ -8,7 +8,7 @@ use App\Models\Datadevice;
 class Report extends BaseController
 {
     
-    public function getIndex()
+    public function index()
     {
         $dataDevice = new Datadevice();
         $data = [

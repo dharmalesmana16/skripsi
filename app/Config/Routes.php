@@ -31,6 +31,8 @@ $routes->group('signin', ['filter' => 'redauth'], function ($routes) {
   $routes->post('/', 'Auth::authlogin');
 });
 $routes->get('/', 'Home::index', ['filter' => 'auth']);
+$routes->get('/log', 'Log::index', ['filter' => 'auth']);
+$routes->get('/report', 'Report::index', ['filter' => 'auth']);
 $db = \Config\Database::connect();
 $query_metadevice = $db->query("SELECT meta FROM datadevice");
 $query_metalampu = $db->query("SELECT meta FROM datalampu");
@@ -54,24 +56,31 @@ $routes->resource("user");
 $routes->resource("lamp");
 
 // $routes->get('/api/getlastdata','Antares::getData');
-// $routes->post('/api/getall','Antares::getall');
+$routes->get('/api/getall','Antares::getall');
 $routes->post('/api/storedata','Antares::executeaction');
 $routes->get('/api/getdata/(:any)','Antares::getDataByDevice/$1');
-
-
-
 // API
-$routes->get("/api/getDataTemp","Api::getDataTemp");
-$routes->get("/api/getDataTempByDevice/(:any)","Api::getDataTempByDevice/$1");
+$routes->get("/api/getDataTemp/(:any)","Api::getDataTemp/$1");
+$routes->get("/api/getDataTemp/","Api::getDataTemp");
+
+$routes->get("/api/getDataEnergy/(:any)","Api::getDataEnergy/$1");
+$routes->get("/api/getDataEnergy","Api::getDataEnergy");
+$routes->get("/api/getDataLight/(:any)","Api::getDataLight/$1");
+$routes->get("/api/getDataLight","Api::getDataLight");
+// $routes->get("/api/getDataTempByDevice/(:any)","Api::getDataTempByDevice/$1");
 $routes->post("/api/lampControlTimer","Api::lampControlTimer");
 $routes->post("/api/lampControlManual","Api::lampControlManual");
 
 // Auth
+$routes->group('signin', ['filter' => 'auth'], function ($routes) {
+  $routes->get('/signin','Auth::login');
+$routes->post('/signin','Auth::authlogin');
+});
 
-$routes->get('/signin','Auth::login');
+
 $routes->get('/logout','Auth::logout');
+
 $routes->get('/signup','Auth::registrasi');
-$routes->post('/authsignin','Auth::authlogin');
 $routes->post('/signup','Auth::authregistrasi');
 
 $routes->group('control', ['filter' => 'auth'], function ($routes) {
@@ -84,6 +93,10 @@ $routes->group('setting', ['filter' => 'auth'], function ($routes) {
 // $routes->get('/control','Control::index');
 $routes->get('/setting/(:any)','Control::editSetting/$1');
 $routes->post('/setting/(:any)','Control::updateSetting/$1');
+
+$routes->get('/control/new', 'Datacontrol::new');
+$routes->post('/control/new', 'Datacontrol::create');
+
 /*
  * --------------------------------------------------------------------
  * Route Definitions

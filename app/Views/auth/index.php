@@ -25,13 +25,17 @@
   
 
   <div class="d-lg-flex half">
-    <div class="bg order-1 order-md-2" style="background-image: url('/images/anemometer2.jpg');"></div>
+    <div class="bg order-1 order-md-2" style="background-image: url('/images/lampu3.jpg');"></div>
     <div class="contents order-2 order-md-1">
 
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <div class="text-center">
+            <div class="p-4">
+                <img src="/images/udayana.png" alt="" srcset="" class="img-fluid w-25">
+              </div>
+              <h2 class="fw-bold">SMART PJU LOGIN ACCESS</h2>
             <!-- <div class="alert alert-primary" role="alert"> -->
         <?php
     if(session()->getFlashData('pending')){
@@ -50,7 +54,7 @@
     ?>
           <!-- </div> -->
             </div>
-            <form action="<?= base_url('/authsignin'); ?>" id="auth" method="post">
+            <form action="<?= base_url('/signin'); ?>" id="auth" method="post">
             <?= csrf_field() ?>
                           <div class="form-group first">
                 <label for="username">Username</label>
@@ -62,10 +66,7 @@
               </div>
               
               <div class="d-flex justify-content-between ml-auto mb-5">
-                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                  <input type="checkbox" checked="checked" name="rememberme" />
-                  <div class="control__indicator"></div>
-                </label>
+              
                       
                 <a href="<?= base_url('/forgotpassword'); ?>" class="forgot-pass">Forgot Password</a>
               </div>

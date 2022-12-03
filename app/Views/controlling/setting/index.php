@@ -6,9 +6,9 @@
 
 
 <div class="container ">
-<div class="card h-100">
-    <div class="card-header">
-        <div class="font-weight-bold display-6">Timer Configuration</div>
+<div class="card-style ">
+    <div class="left">
+        <div class="fw-bold">Timer Configuration</div>
     </div>
 <div class="card-body">
 <form action="/setting/<?= $dataDevice['id']; ?>" method="post">

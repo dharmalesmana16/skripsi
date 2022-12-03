@@ -31,7 +31,7 @@ class Home extends BaseController
         $dataLamp = $query->getResultArray();
         $dataDevice = $queryDevice->getResultArray();
         $data = [
-            "title" => "Page Home",
+            "title" => "Home | Smart PJU",
             "datadevice" => $this->datadevice->getData(),
             "dataLamp" => $dataLamp,
             "dataDevice" => $dataDevice,

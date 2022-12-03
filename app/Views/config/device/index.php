@@ -6,13 +6,11 @@
 <?php
 
 ?>
-<div class="viewmodal" style="display: none;"></div>
 
-<div class="card">
-    <div class="card-header">
-        Data Devices
-    </div>
-    <div class="card-body">
+<div class="card-style ">
+<h6 class="mb-10" id="root" >Data Device</h6>
+                  
+    <a class="main-btn primary-btn btn-hover rounded-md createdevice btn-sm mb-20 fw-bold" href="/device/new" role="button">Create New Data +</a>
 
   
         <div class="table-responsive ">  
@@ -105,10 +103,11 @@
                     </tbody>
                         
                         </table>
-                        <a class="btn btn-sm text-light createdevice" style="background-color: #164396" href="/device/new" role="button">Create New Data</a>
+                        <div class="text-end">
+
+                        </div>
 
                 </div>
-            </div>
 
     </div>
             <script>

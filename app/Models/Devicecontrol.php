@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class Devicecontrol extends Model
 {
-    protected $DBGroup          = 'default';
     protected $table            = 'devicecontrol';
     protected $allowedFields    = ['nama_state','mode','state','started_at','ended_at','created_at','updated_at'];
 

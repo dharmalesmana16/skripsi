@@ -8,13 +8,10 @@
 ?>
 <div class="viewmodal" style="display: none;"></div>
 <div class="editmodal" style="display: none;"></div>
-<div class="newmodal" style="display: none;"></div>
 
-<div class="card">
-    <div class="card-header">
-        Data Devices
-    </div>
-    <div class="card-body">
+<div class="card-style">
+<h6 class="mb-10" id="root" >Data Lamps</h6>
+    <a class="main-btn primary-btn btn-hover rounded-md btn-sm mb-20 text-white fw-bold btncreate" href="/lamp/new" role="button">Create New Data + </a>
 
   
         <div class="table-responsive ">  
@@ -94,29 +91,14 @@
                     </tbody>
                         
                         </table>
-                        <a class="btn btn-sm text-light btncreate" style="background-color: #164396" href="/lamp/new" role="button">Create New Data</a>
-
                 </div>
-            </div>
 
     </div>
+    <div class="newmodal" style="display:none;"></div>
+
             <script>
-                 $(".btncreate").click(function (e) { 
-                    e.preventDefault();
-                    $.ajax({
-                        type: "GET",
-                        url: $(this).attr('href'),
-                        // data: {id"},
-                        dataType: "json",
-                        success: function (response) {
-                            $('.newmodal').html(response.data).show();
-                            $('#device_create').modal('show');
-                        },
-                        error: function(xhr,ajaxOptions,thrownError){
-                            alert(xhr.status + xhr.responseText + thrownError);
-                        }
-                    });
-                });
+                
+                
                 $(".btnedit").click(function (e) { 
                     e.preventDefault();
                     $.ajax({

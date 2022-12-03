@@ -9,38 +9,34 @@ $this->section('content');
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
                 <div class="icon purple">
-                  <i class="lni lni-cart-full"></i>
-                </div>
+				<i class="fa-solid fa-ethernet"></i>                </div>
                 <div class="content">
-                  <h6 class="mb-10">Network Status</h6>
+                  <h6 class="mb-10">Network</h6>
                  
                   <div class=" mb-0 fw-bold text-gray-800">IP Add :  <span class="text-sm"><?= $ipDevice; ?></span></div>
-                    <div class=" mb-0 fw-bold text-gray-800">Mac Add : <?= $macDevice; ?> </div>
+				  <span></span>
                 </div>
               </div>
               <!-- End Icon Cart -->
             </div>
             <!-- End Col -->
             <div class="col-xl-3 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon success">
-                  <i class="lni lni-dollar"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Controlled Lamp</h6>
-                  <div class="h4 fw-bold text-gray-800 "><?= $controlledLamp; ?></div>
-                    <span></span>
-                   
-                  </div>
-              </div>
-              <!-- End Icon Cart -->
-            </div>
+              	<div class="icon-card mb-30">
+					<div class="icon success">
+					<i class="fa-sharp fa-solid fa-toggle-on"></i>                                              
+					</div>
+					<div class="content">
+						<h6 class="mb-10">Controlled Lamp</h6>
+						<div class="h4 fw-bold text-gray-800 "><?= $controlledLamp; ?></div>
+							<span></span>
+					</div>
+				</div>
+			</div>
             <!-- End Col -->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
-                <div class="icon primary">
-                  <i class="lni lni-credit-cards"></i>
-                </div>
+                <div class="icon orange">
+				<i class="fa-solid fa-temperature-half"></i>                </div>
                 <div class="content">
                   <h6 class="mb-10">Device Temperature</h6>
                   <div class=" mb-0 fw-bold text-gray-800" id="temp_">Temp : <span class="" id="temp" class=" mb-0 fw-bold text-gray-800" >-</span></div>
@@ -52,9 +48,9 @@ $this->section('content');
             <!-- End Col -->
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
-                <div class="icon orange">
-                  <i class="lni lni-user"></i>
-                </div>
+                <div class="icon green">
+				<i class="fa-solid fa-wifi"></i>
+			                </div>
                 <div class="content">
                   <h6 class="mb-10">Device Status</h6>
                     <div class=" mb-0 fw-bold text-gray-800">Status :  <span class="text-sm"><?= $statusDevice; ?> </span></div>
@@ -71,7 +67,6 @@ $this->section('content');
                 <div class="title d-flex flex-wrap justify-content-between">
                   <div class="left">
                     <h6 class="text-medium mb-10">Power Consumption</h6>
-                    <h3 class="text-bold">$245,479</h3>
                   </div>
                   <div class="right">
                     <div class="select-style-1">

@@ -42,20 +42,20 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper overflow-hidden">
       <div class="navbar-logo">
-        <!-- <a href="<?= base_Url('/'); ?>">
-          <img src="/images/Nuansa-logo-warna.png" alt="logo" class="img-fluid" />
-        </a> -->
+        <a href="<?= base_Url('/'); ?>">
+          <img src="/images/udayana.png" alt="logo" class="img-fluid w-50" />
+        </a>
       </div>
       <nav class="sidebar-nav" >
         <ul class="navMenus">
-        <li class="nav-item menus">
+        <li class="nav-item menus <?php if($title == "Home | Smart PJU") echo 'active';?>">
             <a href="<?= base_url('/') ?> " class="menu2">
               <span class="icon">
-              <i class="fas fa-columns"></i>           </span>
+              <i class="fas fa-columns"></i></span>
               <span class="text">Home</span>
             </a>
           </li>
-        <li class="nav-item menus">
+        <li class="nav-item menus <?php if($title == "Controlling | Smart PJU") echo 'active';?>">
             <a href="<?= base_url('/control') ?> " class="menu2">
               <span class="icon">
               <i class="fa-sharp fa-solid fa-toggle-on"></i>                                                 </span>
@@ -144,7 +144,7 @@
              
 				<span class="text">Data Device</span>
               </a>             
-			</li>
+			        </li>
               <li>
 			  <a href="<?= base_url('/user')?>">
               
@@ -165,9 +165,9 @@
           <li class="nav-item menus">
             <a href="<?= base_url('/user')?>">
               <span class="icon">
-              <i class="fa-solid fa-gears"></i>
-              </span>
-              <span class="text">Setting</span>
+              <i class=" fa-solid fa-screwdriver-wrench"></i>
+                          </span>
+              <span class="text">Maintenance</span>
             </a>
           </li>
           <li class="nav-item menus">
@@ -177,7 +177,7 @@
               <span class="text">Report</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item menus <?php if($title == "System Log | Smart PJU") echo 'active';?>">
             <a href="<?= base_url('/log')?>">
               <span class="icon">
               <i class="fa-solid fa-file-lines"></i>

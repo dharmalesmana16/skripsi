@@ -22,16 +22,25 @@ class Lamp extends BaseController
     }
 
     public function new(){
-    
-        if($this->request->isAJAX()){
-        $msg = [
-          'data' => view('config/lamp/create'),
-        ];
-        echo json_encode($msg);
-      }
+
+    $data = [
+      "title" => "New Lamp",
+      "pageheader" => "New Lamp",
+    ];
+    return view('config/lamp/create',$data);
     }
     public function create(){
+      // if($this->request->isAJAX()){
+        $data = [
+          "nama_lampu" => $this->request->getVar("nama_lampu"),
+          "brand" => $this->request->getVar("brand"),
+          "type" => $this->request->getVar("type"),
+          "meta" => $this->request->getVar("nama_lampu"),
+        ];
 
+        $this->lampModel->insert($data);
+        // return redirect()->to('/lamp');
+      // }
     }
     public function update(){
 

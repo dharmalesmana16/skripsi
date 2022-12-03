@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body table-responsive">
           
-          <table class="table table-hover table-white table-bordered">
+          <table class="table table-hover table-white ">
                 <tbody>
                     <tr>
                         <th style="" >Device ID</th>

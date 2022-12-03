@@ -2,16 +2,11 @@
 
 
 <?= $this->section('content') ;?>
-
-    <div class="row">
-              <div class="col-lg-12">
-                <div class="card-style mb-30">
+                <div class="card-style ">
                   <h6 class="mb-10" id="root" >Data User</h6>
-              
-                  <p class="text-sm mb-20">
-                  </p>
-                  <div class="table-wrapper table-responsive">
-                    <table class="table users">
+                  <a class="main-btn primary-btn btn-hover text-white btn-sm mb-20 rounded-md fw-bold " href="/user/new" role="button">Create New User + </a>
+                  <div class="table-responsive">
+                    <table class="table-wrapper  table-hover  users">
                     <thead >
                             <tr class="" style="">
                                 <th scope="" >NO</th>
@@ -102,15 +97,12 @@
                     <?php endforeach ?>
                     </tbody>
                     </table>
-                    <a class="btn btn-sm text-light " style="background-color: #164396" href="/user/new" role="button">Create New User</a>
 
                     <!-- end table -->
                   </div>
                 </div>
                 <!-- end card -->
-              </div>
               <!-- end col -->
-            </div>
             <script>
  document.addEventListener('DOMContentLoaded', function () {
                 let table = new DataTable('.users');

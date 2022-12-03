@@ -6,13 +6,13 @@ use App\Controllers\BaseController;
 use App\Models\LogModel;
 class Log extends BaseController
 {
-    public function getIndex()
+    public function index()
     {
         $datalog = new LogModel();
         $data = [
-            'title'=>"Page Log",
+            'title'=>"System Log | Smart PJU",
             'datalog'=>$datalog->getData()
         ];
-        return view("log/index",$data);
+        return view("/log/index",$data);
     }
 }

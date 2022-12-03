@@ -16,7 +16,7 @@ class Control extends BaseController
         $data = [
             "dataControl" =>$this->datacontrol->getData(),
             // "data" =>$this->datacontrol->getControl(),
-            "title" => "Page Control"
+            "title" => "Controlling | Smart PJU"
         ];
         return view('controlling/index',$data);
     }

@@ -2,10 +2,11 @@
 
 <?= $this->section('content'); ?>
 <div class="container ">
-<div class="card h-100">
-<div class="card-header">
-    <div class="font-weight-bold display-6"><?= $pageheader; ?></div>
-</div>
+<div class="card-style h-100">
+  <div class="left">
+
+    <div class="fw-bold"><?= $pageheader; ?></div>
+  </div>
 <div class="card-body">
 <form action="<?= base_url('/device') ?>" method="post" id="datadevices" class="createdevice">
 
@@ -75,7 +76,7 @@
       </div>
     </div>
     <div class="text-end">
-        <button type="submit" class="btn btn-primary btncreate">Tambah Data</button>
+        <button type="submit" class="main-btn primary-btn btn-hover rounded-md fw-bold btncreate">Tambah Data</button>
     </div>
 
 
