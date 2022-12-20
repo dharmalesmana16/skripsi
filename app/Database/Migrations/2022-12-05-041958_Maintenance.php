@@ -4,10 +4,11 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Dataenergy extends Migration
+class Maintenance extends Migration
 {
     public function up()
     {
+       
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
@@ -15,19 +16,18 @@ class Dataenergy extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'kwh' => [
+            'action' => [
                 'type' => 'FLOAT'
             ],
-            'volt' => [
-                'type' => 'FLOAT'
+            'jenis_kerusakan' => [
+                'type' => 'ENUM',
+                'constraint' => ['KERUSAKAN KOMPONEN LAMPU','KERUSAKAN KOMPONEN SISTEM IOT','PEMADAMAN LISTRIK DARI PLN','KERUSAKAN JALUR LISTRIK','DLL'],
             ],
-            'power' => [
-                'type' => 'FLOAT'
+            'jenis_penanganan' => [
+                'type' => 'ENUM',
+                'constraint' => ['PERBAIKAN ','PERAWATAN ','PENGGANTIAN'],
             ],
-            'current' => [
-                'type' => 'FLOAT'
-            ],
-            'id_lamp'=>[
+            'id_user'=>[
                 'type' => 'INT',
                 'unsigned' => true,
 
@@ -35,15 +35,15 @@ class Dataenergy extends Migration
             'created_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
             'updated_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
         ]);
-        $this->forge->addForeignKey('id_lamp','datalampu','id','CASCADE','CASCADE');
+        $this->forge->addForeignKey('id_user','user','id','CASCADE','CASCADE');
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('dataenergy');
+        $this->forge->createTable('datamaintenance');
     }
 
     public function down()
     {
-        $this->forge->dropTable('dataenergy');
+        $this->forge->dropTable('datamaintenance');
 
     }
 }

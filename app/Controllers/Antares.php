@@ -43,15 +43,27 @@ class Antares extends ResourceController
         // $dataSource = $this->request->getJSON();
        return $this->URL;
     }
-    public function getData()
+    public function getData($deviceName = false)
     {
-        $headers = [
-			'X-M2M-Origin' => $this->ACCESSKEY,
-			'Content-Type' => 'application/json'
-		];
+      $headers = [
+        'X-M2M-Origin' => $this->ACCESSKEY,
+        'Content-Type' => 'application/json'
+      ];
+      if($deviceName === false){
+        $msg = [
+          "Status Code" => 500,
+          "Message" =>[
+            "error" => "Set your Device Name !"
+          ],
+        ];
+       return $this->respondCreated($msg);
+      }else{
+
+        $response = $this->client->request('GET',$this->URL."/la",['headers' => $headers,'user_agent' => 'Mozilla/5.0']);
+        return $response;
+      }
+     
 		
-		$response = $this->client->request('GET',$this->URL."/la",['headers' => $headers,'user_agent' => 'Mozilla/5.0']);
-    return $response;
     }
     public function getDataByDevice($devicename = null)
     {

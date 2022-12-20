@@ -1,10 +1,6 @@
-<?php
-$this->extend('template/index');
-$this->section('content');
-
+<?=
+      $this->include('/template/menudevices/index');
 ?>
-<?php
+         
 
-$this->endSection();
-?>
 

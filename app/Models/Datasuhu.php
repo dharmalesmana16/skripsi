@@ -12,7 +12,7 @@ class Datasuhu extends Model
     // Dates
     protected $useTimestamps = true;
 
-    public function getData($id = false ){
+    public function getData($id = false){
         $db = \Config\Database::connect();
         if($id === false){
             return $this->findAll();

@@ -60,8 +60,8 @@ $routes->get('/api/getall','Antares::getall');
 $routes->post('/api/storedata','Antares::executeaction');
 $routes->get('/api/getdata/(:any)','Antares::getDataByDevice/$1');
 // API
-$routes->get("/api/getDataTemp/(:any)","Api::getDataTemp/$1");
-$routes->get("/api/getDataTemp/","Api::getDataTemp");
+$routes->get("/api/getDataTempDevice/(:any)","Api::getDataTempDevice/$1");
+$routes->get("/api/getDataTempDevice","Api::getDataTempDevice");
 
 $routes->get("/api/getDataEnergy/(:any)","Api::getDataEnergy/$1");
 $routes->get("/api/getDataEnergy","Api::getDataEnergy");
@@ -85,6 +85,13 @@ $routes->post('/signup','Auth::authregistrasi');
 
 $routes->group('control', ['filter' => 'auth'], function ($routes) {
   $routes->get('/', 'Control::index');
+});
+$routes->group('maintenance', ['filter' => 'auth'], function ($routes) {
+  $routes->get('', 'Maintenance::index');
+  $routes->get('/(:any)', 'Maintenance::show');
+  $routes->post('', 'Maintenance::create');
+  $routes->post('(:any)', 'Maintenance::update/$1');
+  // $routes->delete('/delete', 'Control::index');
 });
 $routes->group('setting', ['filter' => 'auth'], function ($routes) {
   $routes->get('/', 'Control::index');

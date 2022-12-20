@@ -163,7 +163,7 @@
           
           <span class="divider"><hr /></span>
           <li class="nav-item menus">
-            <a href="<?= base_url('/user')?>">
+            <a href="<?= base_url('/maintenance')?>">
               <span class="icon">
               <i class=" fa-solid fa-screwdriver-wrench"></i>
                           </span>

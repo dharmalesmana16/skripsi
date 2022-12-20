@@ -20,9 +20,6 @@ class Log extends Migration
                 'type' => 'TEXT',
                
             ],
-           
-            
-        
             'created_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
             'updated_at timestamp DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP',
         ]);

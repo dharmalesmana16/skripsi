@@ -2,11 +2,8 @@
 
 <?= $this->section('content'); ?>
 <div class="container ">
-<div class="card h-100">
-<div class="card-header">
-    <div class="font-weight-bold display-6"><?= $pageheader; ?></div>
-</div>
-<div class="card-body">
+<div class="card-style ">
+    <div class="fw-bold  display-6 text-black mb-30"><?= $pageheader; ?></div>
 <form action="<?= base_url('/user') ?>" method="POST" id="datauser" class="createuser">
 <?= csrf_field() ?>
 <div class="row mb-3">
@@ -59,7 +56,6 @@
 
 
   </div>
-</div>
 </div>
 <!-- End Button Data -->    
 </form>

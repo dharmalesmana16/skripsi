@@ -24,7 +24,7 @@ class User extends ResourceController
 	   public function new(){
 		$data = [
 		  "title" => "Data Devices | NS2 Anemometer",
-		  "pageheader" => "Create New Device",
+		  "pageheader" => "Create New User",
 		  "dataDevice" => $this->userModel->getData()
 		 ];
 		 return view("config/user/create",$data);
