@@ -1,0 +1,373 @@
+@extends('template.index')
+@section('content')
+
+<style>
+    .map-responsive {
+        overflow: hidden;
+        padding-bottom: 46.25%;
+        position: relative;
+        height: 0;
+    }
+
+    .containerchart {
+        overflow: hidden;
+        position: relative;
+        resize: both;
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+<script>
+    var gaugeDevice = Gauge(
+        document.getElementById("gauge1"), {
+            max: 2,
+            dialStartAngle: -90,
+            dialEndAngle: -90.001,
+            strokeWidth: 5, // The thickness
+            value: 0,
+            //   dialRadius: ,
+
+            label: function (value) {
+                return Math.round(value) + "/" + this.max;
+            },
+
+            color: function (value) {
+                if (value == 0) {
+                    return "#C40D42";
+                } else if (value >= 1 && value < this.max) {
+                    return "#F7941E";
+                } else {
+                    return "#B3D335";
+                }
+            }
+        }
+    );
+    (function loop() {
+
+
+
+        gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
+    })();
+    var gaugeDevice = Gauge(
+        document.getElementById("gauge2"), {
+            max: 2,
+            dialStartAngle: -90,
+            dialEndAngle: -90.001,
+            value: 0,
+            label: function (value) {
+                return Math.round(value) + "/" + this.max;
+            },
+            color: function (value) {
+                if (value == 0) {
+                    return "#C40D42";
+                } else if (value >= 1 && value < this.max) {
+                    return "#F7941E";
+                } else {
+                    return "#B3D335";
+                }
+            }
+        }
+    );
+    (function loop() {
+
+
+
+        gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
+    })();
+    var gaugeDevice = Gauge(
+        document.getElementById("gauge3"), {
+            max: 2,
+            dialStartAngle: -90,
+            dialEndAngle: -90.001,
+            value: 0,
+            label: function (value) {
+                return Math.round(value) + "/" + this.max;
+            },
+            color: function (value) {
+                if (value == 0) {
+                    return "#C40D42";
+                } else if (value >= 1 && value < this.max) {
+                    return "#F7941E";
+                } else {
+                    return "#B3D335";
+                }
+            }
+        }
+    );
+    (function loop() {
+
+
+
+        gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
+        window.setTimeout(loop, 2000);
+    })();
+
+</script>
+<div class="row">
+    <div class="col-xl-4 col-lg-4 col-sm-6">
+        <div class="icon-card mb-30">
+            <div class="icon purple">
+                <i class="lni lni-cart-full"></i>
+            </div>
+            <div class="content">
+                <h6 class="mb-10">Device Active</h6>
+                <h3 class="text-bold mb-10">1 / 2</h3>
+                <p class="text-sm text-success">
+                    <span class="text-gray">(30 days)</span>
+                </p>
+            </div>
+        </div>
+        <!-- End Icon Cart -->
+    </div>
+    <!-- End Col -->
+    <div class="col-xl-4 col-lg-4 col-sm-6">
+        <div class="icon-card mb-30">
+            <div class="icon success">
+                <i class="fa-thin fa-lamp-street"></i> </div>
+            <div class="content">
+                <h6 class="mb-10">Street Lamp Active</h6>
+                <h3 class="text-bold mb-10">0 / 2</h3>
+                <p class="text-sm text-success">
+                    <span class="text-gray">Increased</span>
+                </p>
+            </div>
+        </div>
+        <!-- End Icon Cart -->
+    </div>
+    <!-- End Col -->
+    <div class="col-xl-4 col-lg-4 col-sm-6">
+        <div class="icon-card mb-30">
+            <div class="icon primary">
+                <i class="lni lni-credit-cards"></i>
+            </div>
+            <div class="content">
+                <h6 class="mb-10">User Active</h6>
+                <h3 class="text-bold mb-10">1 / 1</h3>
+                <p class="text-sm text-danger">
+                    <span class="text-gray">Expense</span>
+                </p>
+            </div>
+        </div>
+        <!-- End Icon Cart -->
+    </div>
+    <!-- End Col -->
+
+    <!-- End Col -->
+</div>
+<div class="card-style mb-30 ">
+    <div class="left">
+        <h6 class="text-medium mb-10">Device Location</h6>
+    </div>
+    <div id="maps" class="map-responsive" style=""></div>
+    <!-- end card -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card-style  h-100 mb-30">
+            <h6 class="mb-10">Street Lamp Data</h6>
+
+            <div class="table-wrapper table-responsive ">
+                <table class="table table-hover lamps">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h6>No</h6>
+                            </th>
+                            <th>
+                                <h6>Name</h6>
+                            </th>
+                            <th>
+                                <h6>Mode</h6>
+                            </th>
+                            <th>
+                                <h6>Started At</h6>
+                            </th>
+                            <th>
+                                <h6>Ended At</h6>
+                            </th>
+                            <th>
+                                <h6>Status</h6>
+                            </th>
+                            <th>
+                                <h6>Controlled By</h6>
+                            </th>
+                        </tr>
+                        <!-- end table row-->
+                    </thead>
+                    <tbody class="fs-3">
+                        <?php
+              $no = 1;
+            foreach($dataLamp as $dataLamps):
+				$status = $dataLamps['status'];
+				$retStatus = "";
+				if($status = "NOT ACTIVE"){
+					$retStatus= '<span class="danger-btn status-btn">NOT ACTIVE</span>';
+				}else{
+					$retStatus= '<span class="success-btn status-btn">ACTIVE</span>';
+
+				}
+            ?>
+                        <tr>
+                            <td class="min-width ">
+                                <p><?= $no++ ?></p>
+                            </td>
+                            <td class="min-width">
+                                <p><?= $dataLamps['nama_lampu']; ?></p>
+                            </td>
+
+                            <td class="min-width">
+                                <p><?= $dataLamps['mode']; ?></p>
+                            </td>
+                            <td class="min-width">
+                                <p><?= $dataLamps['started_at']; ?></p>
+                            </td>
+                            <td class="min-width">
+                                <p><?= $dataLamps['ended_at']; ?></p>
+                            </td>
+                            <td class="min-width">
+                                <?= $retStatus; ?>
+                            </td>
+                            <td class="min-width">
+                                <p><?= $dataLamps['nama_device']; ?></p>
+                            </td>
+
+
+
+                        </tr>
+                        <?php
+            endforeach
+            ?>
+                        <!-- end table row -->
+
+                    </tbody>
+                </table>
+                <!-- end table -->
+            </div>
+        </div>
+        <!-- end card -->
+
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card-style mb-30 h-100">
+            <h6 class="mb-10">Data Device</h6>
+
+            <div class="table-wrapper table-responsive ">
+                <table class="table table-hover temps">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h6>No</h6>
+                            </th>
+                            <th>
+                                <h6>Device</h6>
+                            </th>
+                            <th class="text-center">
+                                <h6>Temperature</h6>
+                            </th>
+                            <th class="text-center">
+                                <h6>Humidity</h6>
+                            </th>
+                            <th>
+                                <h6>Status</h6>
+                            </th>
+                        </tr>
+                        <!-- end table row-->
+                    </thead>
+                    <tbody class="fs-3">
+                        <?php
+              $no = 1;
+            foreach($dataDevice as $dataDevices):
+            $status = $dataDevices['status'];
+            $retStatus = "";
+            if($status == "NOT ACTIVE"){
+              $retStatus= '<span class="danger-btn status-btn">NOT ACTIVE</span>';
+            }else{
+              $retStatus= '<span class="success-btn status-btn">ACTIVE</span>';
+
+            }
+            $indicatorTemp ="";
+            if($dataDevices["temp"] > 33){
+              $indicatorTemp = "text-danger";
+            }elseif($dataDevices["temp"] >=30 and $dataDevices["temp"] <= 33 ){
+              $indicatorTemp = "text-warning";
+
+            }
+
+            else {
+            $indicatorTemp = "text-success";
+
+            }
+            ?>
+                        <tr>
+                            <td class="min-width ">
+                                <p><?= $no++ ?></p>
+                            </td>
+                            <td class="min-width">
+                                <p><?= $dataDevices['nama_device']; ?></p>
+
+                            </td>
+
+                            <td class="min-width text-center">
+                                <p class="<?= $indicatorTemp ?> fw-bold"><?= $dataDevices['temp']."°C"; ?></p>
+                            </td>
+                            <td class="min-width text-center">
+                                <p><?= $dataDevices['humi']; ?></p>
+                            </td>
+                            <td class="min-width">
+                                <?= $retStatus; ?>
+                            </td>
+                        </tr>
+                        <?php
+            endforeach
+            ?>
+                        <!-- end table row -->
+                    </tbody>
+                </table>
+                <!-- end table -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-style mt-30">
+    <div class="title d-flex flex-wrap align-items-center justify-content-between">
+        <div class="left">
+            <h6 class="text-medium mb-30">Energy Consumption Total of Street Lamp</h6>
+        </div>
+        <div class="right">
+            <div class="select-style-1">
+                <div class="select-position select-sm">
+                    <select id="selectEnergy" class="light-bg">
+                        <?php
+                    foreach($datadevice as $datadevices):
+                    ?>
+                        <option value="<?= $datadevices["meta"]; ?>"><?= $datadevices["nama_device"]; ?></option>
+                        <?php
+                    endforeach
+                    ?>
+                    </select>
+                </div>
+            </div>
+            <!-- end select -->
+        </div>
+    </div>
+    <!-- End Title -->
+    <div class="chart containerchart">
+        <canvas id="Chart1"></canvas>
+    </div>
+    <!-- End Chart -->
+</div>
+<div class="row">
+
+    <div class="col-xl-12 col-lg-12 col-12">
+
+    </div>
+
+</div>
+
+
+
+
+@endsection
