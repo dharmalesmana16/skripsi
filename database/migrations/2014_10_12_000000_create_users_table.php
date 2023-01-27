@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('handphone')->unique();
             $table->string('password');
+            $table->enum('status', ['ACTIVE', 'PENDING', 'NOT ACTIVE']);
+            $table->enum('role', ['ADMIN', 'STAFF']);
+
             $table->timestamps();
         });
     }

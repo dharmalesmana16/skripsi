@@ -42,27 +42,32 @@ class UsersController extends Controller
 
             return view("config.users.create", $data);
         } elseif ($request->isMethod('post')) {
-
-            $nama_device = $request->input('device_name');
-            $brand_device = $request->input('brand_device');
-            $ipaddress = $request->input('ip1') . "." . $request->input('ip2') . "." . $request->input('ip3') . "." . $request->input('ip4');
-            $macaddress = $request->input('mac');
-            $latitude = $request->input('latitude');
-            $longitude = $request->input('longitude');
-            $meta = Str::lower($nama_device);
+            $mode = $request->input("mode");
+            $first_name = $request->input('first_name');
+            $last_name = $request->input('last_name');
+            $username = $request->input('username');
+            $email = $request->input('email');
+            $role = $request->input('role');
+            $password = password_hash($request->input('password'), PASSWORD_BCRYPT);
+            $handphone = $request->input('handphone');
             $status = "ACTIVE";
+            if ($mode == "newfrRegister") {
+                $password = password_hash($request->input('password'), PASSWORD_BCRYPT);
+                $role = '-';
+                $status = 'PENDING';
+            }
 
-            $this->devices::create([
-                'nama_device' => $nama_device,
-                'brand_device' => $brand_device,
-                'ipaddress' => $ipaddress,
-                'macaddress' => $macaddress,
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'meta' => $meta,
+            $this->users::create([
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'username' => $username,
+                'email' => $email,
+                'handphone' => $handphone,
+                'password' => $password,
+                'role' => $role,
                 'status' => $status,
             ]);
-            return redirect('/devices');
+            return redirect('/users');
 
         }
 

@@ -6,16 +6,17 @@
     <div class="card-style ">
         <form action="{{ url('/users/new') }}" method="POST" id="datauser" class="createuser">
             @csrf
+            <input type="hidden" name="newfrAdmin">
             <div class="row mb-3">
-                <label for="nama_depan" class="col-sm-2 col-form-label">First Name</label>
+                <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nama_depan" id="nama_depan" placeholder="First Name">
+                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="nama_belakang" class="col-sm-2 col-form-label">Last Name</label>
+                <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nama_belakang" id="nama_belakang"
+                    <input type="text" class="form-control" name="last_name" id="last_name"
                         placeholder="Last Name" value="">
                 </div>
             </div>
@@ -28,9 +29,9 @@
             </div>
 
             <div class="row mb-3">
-                <label for="nohp" class="col-sm-2 col-form-label">Handphone</label>
+                <label for="handphone" class="col-sm-2 col-form-label">Handphone</label>
                 <div class="col-sm-10">
-                    <input type="text" id="nohp" name="nohp" class="form-control" placeholder="Handphone" value=""
+                    <input type="text" id="handphone" name="handphone" class="form-control" placeholder="Handphone" value=""
                         required />
                 </div>
             </div>
