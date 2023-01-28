@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ControllingController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\UsersController;
@@ -19,6 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.index');
 });
+Route::get('/signout', [AuthController::class, 'logout']);
+Route::controller(AuthController::class)->prefix('signin')->middleware('RedirectIfAuth')->group(function () {
+    Route::get('', 'index');
+    Route::post('', 'authenticate');
+});
+Route::controller(AuthController::class)->prefix('signup')->group(function () {
+    Route::get('', 'signup');
+    Route::post('', 'signup');
+});
+
 // Route::get('/devices', [DevicesController::class, 'index']);
 Route::controller(DevicesController::class)->prefix('devices')->group(function () {
     Route::get('', 'index');
@@ -39,7 +50,7 @@ Route::controller(ControllingController::class)->prefix('controls')->group(funct
     Route::post('devices/update/{meta}', 'update');
     // Route::post('/controlling/update', 'update');
 });
-Route::controller(UsersController::class)->prefix('users')->group(function () {
+Route::controller(UsersController::class)->prefix('users')->middleware('checkAuth')->group(function () {
     Route::get('', 'index');
     Route::get('show/{meta}', 'show');
     Route::get('new', 'new');

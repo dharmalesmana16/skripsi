@@ -9,7 +9,7 @@ class DevicesModel extends Model
 {
     use HasFactory;
     protected $table = 'devices';
-    protected $timestamps = true;
+    public $timestamps = true;
 
     // protected $guarded = ["*"];
     protected $fillable = ['nama_device', 'brand_device',

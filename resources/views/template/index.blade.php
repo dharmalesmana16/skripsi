@@ -35,7 +35,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-  </head>
+    @vite([])
+</head>
 
   <body>
 
@@ -276,7 +277,7 @@
                       <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
                     </li>
                     <li>
-                      <a href="/logout"> <i class="lni lni-exit"></i> Sign Out </a>
+                      <a href="/signout"> <i class="lni lni-exit"></i> Sign Out </a>
                     </li>
                   </ul>
                 </div>

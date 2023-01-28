@@ -6,7 +6,7 @@
     <div class="card-style ">
         <form action="{{ url('/users/new') }}" method="POST" id="datauser" class="createuser">
             @csrf
-            <input type="hidden" name="newfrAdmin">
+            <input type="hidden" name="mode" value="newfrAdmin">
             <div class="row mb-3">
                 <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
                 <div class="col-sm-10">
@@ -90,7 +90,7 @@
                         showConfirmButton: false
                     });
                     setTimeout(function () { // wait for 1 secs(2)
-                        window.location = '/user'; // then reload the page.(3)
+                        window.location = '/users'; // then reload the page.(3)
                     }, 1000);
                 }
             });

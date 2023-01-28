@@ -48,13 +48,15 @@ class UsersController extends Controller
             $username = $request->input('username');
             $email = $request->input('email');
             $role = $request->input('role');
-            $password = password_hash($request->input('password'), PASSWORD_BCRYPT);
             $handphone = $request->input('handphone');
-            $status = "ACTIVE";
+
             if ($mode == "newfrRegister") {
                 $password = password_hash($request->input('password'), PASSWORD_BCRYPT);
                 $role = '-';
                 $status = 'PENDING';
+            } elseif ($mode == "newfrAdmin") {
+                $password = password_hash('x0121oke', PASSWORD_BCRYPT);
+                $status = "ACTIVE";
             }
 
             $this->users::create([
@@ -67,7 +69,7 @@ class UsersController extends Controller
                 'role' => $role,
                 'status' => $status,
             ]);
-            return redirect('/users');
+            return redirect('/signin');
 
         }
 

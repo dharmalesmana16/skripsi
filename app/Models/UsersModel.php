@@ -10,11 +10,11 @@ class UsersModel extends Model
     use HasFactory;
 
     protected $table = 'users';
-    protected $timestamps = true;
+    // public $timestamps = true;
 
     // protected $guarded = ["*"];
     protected $fillable = ['first_name', 'last_name',
-        'username', 'email', 'handphone', 'password', 'created_at', 'updated_at'];
+        'username', 'email', 'handphone', 'password', 'created_at', 'updated_at', 'status'];
     public function getData($id = false)
     {
         if ($id === false) {
