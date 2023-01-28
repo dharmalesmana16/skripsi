@@ -18,92 +18,6 @@
     }
 
 </style>
-<script>
-    var gaugeDevice = Gauge(
-        document.getElementById("gauge1"), {
-            max: 2,
-            dialStartAngle: -90,
-            dialEndAngle: -90.001,
-            strokeWidth: 5, // The thickness
-            value: 0,
-            //   dialRadius: ,
-
-            label: function (value) {
-                return Math.round(value) + "/" + this.max;
-            },
-
-            color: function (value) {
-                if (value == 0) {
-                    return "#C40D42";
-                } else if (value >= 1 && value < this.max) {
-                    return "#F7941E";
-                } else {
-                    return "#B3D335";
-                }
-            }
-        }
-    );
-    (function loop() {
-
-
-
-        gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
-    })();
-    var gaugeDevice = Gauge(
-        document.getElementById("gauge2"), {
-            max: 2,
-            dialStartAngle: -90,
-            dialEndAngle: -90.001,
-            value: 0,
-            label: function (value) {
-                return Math.round(value) + "/" + this.max;
-            },
-            color: function (value) {
-                if (value == 0) {
-                    return "#C40D42";
-                } else if (value >= 1 && value < this.max) {
-                    return "#F7941E";
-                } else {
-                    return "#B3D335";
-                }
-            }
-        }
-    );
-    (function loop() {
-
-
-
-        gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
-    })();
-    var gaugeDevice = Gauge(
-        document.getElementById("gauge3"), {
-            max: 2,
-            dialStartAngle: -90,
-            dialEndAngle: -90.001,
-            value: 0,
-            label: function (value) {
-                return Math.round(value) + "/" + this.max;
-            },
-            color: function (value) {
-                if (value == 0) {
-                    return "#C40D42";
-                } else if (value >= 1 && value < this.max) {
-                    return "#F7941E";
-                } else {
-                    return "#B3D335";
-                }
-            }
-        }
-    );
-    (function loop() {
-
-
-
-        gaugeDevice.setValueAnimated(2, 2); // setValue(Berapa mau menambah, speed perputaran)
-        window.setTimeout(loop, 2000);
-    })();
-
-</script>
 <div class="row">
     <div class="col-xl-4 col-lg-4 col-sm-6">
         <div class="icon-card mb-30">
@@ -152,8 +66,6 @@
         <!-- End Icon Cart -->
     </div>
     <!-- End Col -->
-
-    <!-- End Col -->
 </div>
 <div class="card-style mb-30 ">
     <div class="left">
@@ -163,7 +75,7 @@
     <!-- end card -->
 </div>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="card-style  h-100 mb-30">
             <h6 class="mb-10">Street Lamp Data</h6>
 
@@ -192,14 +104,17 @@
                             <th>
                                 <h6>Controlled By</h6>
                             </th>
+                            <th>
+                                <h6>Action</h6>
+                            </th>
                         </tr>
                         <!-- end table row-->
                     </thead>
                     <tbody class="fs-3">
                         <?php
               $no = 1;
-            foreach($dataLamp as $dataLamps):
-				$status = $dataLamps['status'];
+            foreach($lamps as $dataLamps):
+				$status = $dataLamps->status;
 				$retStatus = "";
 				if($status = "NOT ACTIVE"){
 					$retStatus= '<span class="danger-btn status-btn">NOT ACTIVE</span>';
@@ -213,23 +128,34 @@
                                 <p><?= $no++ ?></p>
                             </td>
                             <td class="min-width">
-                                <p><?= $dataLamps['nama_lampu']; ?></p>
+                                <p><?= $dataLamps->nama_lampu; ?></p>
                             </td>
 
                             <td class="min-width">
-                                <p><?= $dataLamps['mode']; ?></p>
+                                <p><?= $dataLamps->mode; ?></p>
                             </td>
                             <td class="min-width">
-                                <p><?= $dataLamps['started_at']; ?></p>
+                                <p><?= $dataLamps->started_at; ?></p>
                             </td>
                             <td class="min-width">
-                                <p><?= $dataLamps['ended_at']; ?></p>
+                                <p><?= $dataLamps->ended_at; ?></p>
                             </td>
                             <td class="min-width">
                                 <?= $retStatus; ?>
                             </td>
                             <td class="min-width">
-                                <p><?= $dataLamps['nama_device']; ?></p>
+                                <p><?= $dataLamps->nama_device; ?></p>
+                            </td>
+                            <td>
+
+                                <form method="GET" class="d-inline btnshow">
+                                    <!-- <input type="hidden" name="_method" value="DELETE" > -->
+                                    <div class="actionshow">
+                                        <button type="submit" class="btn text-success">
+                                            <i class="lni lni-eye"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </td>
 
 
@@ -249,86 +175,7 @@
 
     </div>
 
-    <div class="col-lg-6">
-        <div class="card-style mb-30 h-100">
-            <h6 class="mb-10">Data Device</h6>
 
-            <div class="table-wrapper table-responsive ">
-                <table class="table table-hover temps">
-                    <thead>
-                        <tr>
-                            <th>
-                                <h6>No</h6>
-                            </th>
-                            <th>
-                                <h6>Device</h6>
-                            </th>
-                            <th class="text-center">
-                                <h6>Temperature</h6>
-                            </th>
-                            <th class="text-center">
-                                <h6>Humidity</h6>
-                            </th>
-                            <th>
-                                <h6>Status</h6>
-                            </th>
-                        </tr>
-                        <!-- end table row-->
-                    </thead>
-                    <tbody class="fs-3">
-                        <?php
-              $no = 1;
-            foreach($dataDevice as $dataDevices):
-            $status = $dataDevices['status'];
-            $retStatus = "";
-            if($status == "NOT ACTIVE"){
-              $retStatus= '<span class="danger-btn status-btn">NOT ACTIVE</span>';
-            }else{
-              $retStatus= '<span class="success-btn status-btn">ACTIVE</span>';
-
-            }
-            $indicatorTemp ="";
-            if($dataDevices["temp"] > 33){
-              $indicatorTemp = "text-danger";
-            }elseif($dataDevices["temp"] >=30 and $dataDevices["temp"] <= 33 ){
-              $indicatorTemp = "text-warning";
-
-            }
-
-            else {
-            $indicatorTemp = "text-success";
-
-            }
-            ?>
-                        <tr>
-                            <td class="min-width ">
-                                <p><?= $no++ ?></p>
-                            </td>
-                            <td class="min-width">
-                                <p><?= $dataDevices['nama_device']; ?></p>
-
-                            </td>
-
-                            <td class="min-width text-center">
-                                <p class="<?= $indicatorTemp ?> fw-bold"><?= $dataDevices['temp']."°C"; ?></p>
-                            </td>
-                            <td class="min-width text-center">
-                                <p><?= $dataDevices['humi']; ?></p>
-                            </td>
-                            <td class="min-width">
-                                <?= $retStatus; ?>
-                            </td>
-                        </tr>
-                        <?php
-            endforeach
-            ?>
-                        <!-- end table row -->
-                    </tbody>
-                </table>
-                <!-- end table -->
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="card-style mt-30">
@@ -341,9 +188,9 @@
                 <div class="select-position select-sm">
                     <select id="selectEnergy" class="light-bg">
                         <?php
-                    foreach($datadevice as $datadevices):
+                    foreach($devices as $datadevices):
                     ?>
-                        <option value="<?= $datadevices["meta"]; ?>"><?= $datadevices["nama_device"]; ?></option>
+                        <option value="<?= $datadevices->meta; ?>"><?= $datadevices->nama_device; ?></option>
                         <?php
                     endforeach
                     ?>
@@ -354,17 +201,13 @@
         </div>
     </div>
     <!-- End Title -->
-    <div class="chart containerchart">
-        <canvas id="Chart1"></canvas>
+    <div class="chart">
+        <figure class="highcharts-figure">
+            <div id="chartEnergyHome"></div>
+
+        </figure>
     </div>
     <!-- End Chart -->
-</div>
-<div class="row">
-
-    <div class="col-xl-12 col-lg-12 col-12">
-
-    </div>
-
 </div>
 
 

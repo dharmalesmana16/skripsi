@@ -3,6 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ControllingController;
 use App\Http\Controllers\DevicesController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogsController;
+use App\Http\Controllers\MonitoringDevicesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('home.index');
-});
+Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/signout', [AuthController::class, 'logout']);
 Route::controller(AuthController::class)->prefix('signin')->middleware('RedirectIfAuth')->group(function () {
     Route::get('', 'index');
@@ -59,12 +61,20 @@ Route::controller(UsersController::class)->prefix('users')->middleware('checkAut
     Route::post('update/{meta}', 'update');
     // Route::post('/controlling/update', 'update');
 });
-// Route::controller(LampsController::class)->prefix('users')->group(function () {
-//     Route::get('', 'index');
-//     Route::get('{meta}', 'show');
-//     Route::get('new', 'new');
-//     Route::post('new', 'new');
-//     Route::get('devices/update/{meta}', 'update');
-//     Route::post('devices/update/{meta}', 'update');
-//     // Route::post('/controlling/update', 'update');
-// });
+Route::controller(LampsController::class)->prefix('lamps')->group(function () {
+    Route::get('', 'index');
+    Route::get('show/{meta}', 'show');
+    Route::get('new', 'new');
+    Route::post('new', 'new');
+    Route::get('devices/update/{meta}', 'update');
+    Route::post('devices/update/{meta}', 'update');
+    // Route::post('/controlling/update', 'update');
+});
+Route::controller(LogsController::class)->prefix('logs')->group(function () {
+    Route::get('', 'index');
+    Route::get('show/{meta}', 'show');
+
+    // Route::post('/controlling/update', 'update');
+});
+
+Route::get("/monitoring" . "/{device}", [MonitoringDevicesController::class, 'index']);

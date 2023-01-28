@@ -35,7 +35,9 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    @vite([])
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    @vite(['resources/js/app.js'])
 </head>
 
   <body>
@@ -174,7 +176,7 @@
             </a>
           </li>
           <li class="nav-item menus <?php if($title == "System Log | Smart PJU") echo 'active';?>">
-            <a href="{{ url('/log') }}">
+            <a href="{{ url('/logs') }}">
               <span class="icon">
               <i class="fa-solid fa-file-lines"></i>
               </span>
@@ -339,6 +341,7 @@
     <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="/js/gauge/gauge.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="/js/datatables.min.js"></script>
     <script src="/toggle/js/bootstrap4-toggle.min.js"></script>
@@ -353,6 +356,8 @@
     <script src="/js/world-merc.js"></script>
     <script src="/js/polyfill.js"></script>
     <script src="/js/main.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>

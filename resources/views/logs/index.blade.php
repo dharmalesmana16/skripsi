@@ -22,7 +22,7 @@
                     <?php
                         $no_device =1;
                         ?>
-                    <?php foreach ($datalog as $dataLogs) :
+                    <?php foreach ($logs as $dataLogs) :
                             $datetime = new DateTime($dataLogs['created_at']);
                             $resultdate = $datetime->format('d M Y, H:i:s');
 
