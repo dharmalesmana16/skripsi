@@ -1,6 +1,8 @@
 @extends('template.index')
 @section('content')
-
+@push('home')
+@vite(['resources/js/app.js'])
+@endpush
 <style>
     .map-responsive {
         overflow: hidden;
@@ -22,14 +24,12 @@
     <div class="col-xl-4 col-lg-4 col-sm-6">
         <div class="icon-card mb-30">
             <div class="icon purple">
-                <i class="lni lni-cart-full"></i>
+                <i class="fa-solid fa-microchip"></i>
             </div>
             <div class="content">
-                <h6 class="mb-10">Device Active</h6>
+                <h6 class="mb-10">Devices Active</h6>
                 <h3 class="text-bold mb-10">1 / 2</h3>
-                <p class="text-sm text-success">
-                    <span class="text-gray">(30 days)</span>
-                </p>
+
             </div>
         </div>
         <!-- End Icon Cart -->
@@ -38,13 +38,11 @@
     <div class="col-xl-4 col-lg-4 col-sm-6">
         <div class="icon-card mb-30">
             <div class="icon success">
-                <i class="fa-thin fa-lamp-street"></i> </div>
+                <i class="fa-solid fa-lamp-street"></i> </div>
             <div class="content">
                 <h6 class="mb-10">Street Lamp Active</h6>
                 <h3 class="text-bold mb-10">0 / 2</h3>
-                <p class="text-sm text-success">
-                    <span class="text-gray">Increased</span>
-                </p>
+
             </div>
         </div>
         <!-- End Icon Cart -->
@@ -53,14 +51,12 @@
     <div class="col-xl-4 col-lg-4 col-sm-6">
         <div class="icon-card mb-30">
             <div class="icon primary">
-                <i class="lni lni-credit-cards"></i>
+                <i class="lni lni-users"></i>
             </div>
             <div class="content">
                 <h6 class="mb-10">User Active</h6>
                 <h3 class="text-bold mb-10">1 / 1</h3>
-                <p class="text-sm text-danger">
-                    <span class="text-gray">Expense</span>
-                </p>
+
             </div>
         </div>
         <!-- End Icon Cart -->
@@ -71,7 +67,7 @@
     <div class="left">
         <h6 class="text-medium mb-10">Device Location</h6>
     </div>
-    <div id="maps" class="map-responsive" style=""></div>
+    <div id="map" class="map-responsive" style="width: 100%, height: 400px"></div>
     <!-- end card -->
 </div>
 <div class="row">
@@ -203,7 +199,7 @@
     <!-- End Title -->
     <div class="chart">
         <figure class="highcharts-figure">
-            <div id="chartEnergyHome"></div>
+            <div id="chartHomeEnergy"></div>
 
         </figure>
     </div>

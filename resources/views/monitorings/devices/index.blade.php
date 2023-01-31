@@ -1,4 +1,8 @@
 @extends('template.index')
+@push('moreAssets')
+
+<script src="/js/monitoringDevices.js"></script>
+@endpush
 @section('content')
 
 <div class="row">
@@ -12,7 +16,7 @@
             </div>
             <div class="content">
                 <h6 class="mb-10">Controlled Lamp</h6>
-                <div class="h4 fw-bold text-gray-800 "><span class="text-sm" id="controlledLamp"> </span></div>
+                <div class="h4 fw-bold text-gray-800 "><span class="" id="controlledLamp">{{ count($lamps) }} </span></div>
                 <span></span>
             </div>
         </div>
@@ -87,6 +91,7 @@
 
                         <?php
                 $no = 1;
+
               foreach($lamps as $dataLamps):
               ?>
                         <tr>
@@ -109,6 +114,7 @@
                             <td class="min-width">
                                 <p><?= $dataLamps->status; ?></p>
                             </td>
+
 
                             <td>
                                 <div class="action">
@@ -198,5 +204,5 @@
     </div>
     <!-- End Col -->
 </div>
-
 @endsection
+

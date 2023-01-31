@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DevicesModel;
+use App\Models\UsersModel;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class HomeController extends Controller
             "title" => "Homepage",
             "lamps" => $resp,
             "devices" => DevicesModel::all(),
+            "users" => UsersModel::all(),
         ];
         return view("home.index", $data);
     }

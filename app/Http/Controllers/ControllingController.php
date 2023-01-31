@@ -59,11 +59,22 @@ class ControllingController extends Controller
     {
     }
 
-    public function remove($id = null)
+    public function delete($id = null)
     {
     }
 
-    public function delete($id = null)
+    public function indextimer($controlsId = null)
     {
+        $res = DB::table('controls')->where('id', $controlsId)->first();
+        $data = [
+            "title" => "Setting Timer $res->nama_state",
+            "dataDevice" => $res,
+        ];
+        return view('controlling.setting.index', $data);
+    }
+    public function updatetimer($controlsId = null)
+    {
+        // $res = DB::table('controls')->where('id', $controlsId)->first();
+
     }
 }

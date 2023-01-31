@@ -16,25 +16,18 @@
     <link rel="stylesheet" href="/css/lineicons.css" />
     <link rel="stylesheet" href="/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="/css/fullcalendar.css" />
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="/css/datatables.min.css"/>
     <link href="/toggle/css/bootstrap4-toggle.min.css" rel="stylesheet">
-  <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
-  <script src="/js/gauge/gauge.min.js"></script>
-
-  <script src="/js/Chart.min.js"></script>
-  <!-- <script src="/js/Chart.js"></script> -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script type="text/javascript" src="/js/datatables.min.js"></script>
-
+    @stack('home')
+    <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/js/gauge/gauge.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="/js/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
     @vite(['resources/js/app.js'])
@@ -335,31 +328,22 @@
       </footer>
       <!-- ========== footer end =========== -->
     </main>
-
-    <!-- ======== main-wrapper end =========== -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ1vBYV-pf6hSYPwvaAcKMD36JWI8MyAY&callback=myMap&v=weekly"></script>
-    <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="/js/gauge/gauge.min.js"></script>
-
+    @stack('homeJS')
+    @stack('moreAssets')
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
+    <!-- ======== main-wrapper end =========== -->
+    <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/js/gauge/gauge.min.js"></script>
     <script type="text/javascript" src="/js/datatables.min.js"></script>
     <script src="/toggle/js/bootstrap4-toggle.min.js"></script>
-
-    <!-- ========= All Javascript files linkup ======== -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/dynamic-pie-chart.js"></script>
     <script src="/js/moment.min.js"></script>
     <script src="/js/fullcalendar.js"></script>
-    <script src="/js/jvectormap.min.js"></script>
-    <script src="/js/world-merc.js"></script>
     <script src="/js/polyfill.js"></script>
     <script src="/js/main.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
-    <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
   </body>
 </html>

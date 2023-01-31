@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AntaresController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ControllingController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\MonitoringDevicesController;
+use App\Http\Controllers\MonitoringLampsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->middleware('checkAuth');
 
 Route::get('/signout', [AuthController::class, 'logout']);
 Route::controller(AuthController::class)->prefix('signin')->middleware('RedirectIfAuth')->group(function () {
@@ -31,9 +33,16 @@ Route::controller(AuthController::class)->prefix('signup')->group(function () {
     Route::get('', 'signup');
     Route::post('', 'signup');
 });
+Route::controller(AntaresController::class)->prefix('api/antares')->group(function () {
+    Route::get('action', 'action');
+    Route::get('action/timer', 'action');
+    Route::get('retdevice', 'retDataDevice');
+    Route::get('retalldevice', 'retAllDataDevice');
+    Route::get('retlastestdata/{devicename}', 'retLastestData');
+});
 
 // Route::get('/devices', [DevicesController::class, 'index']);
-Route::controller(DevicesController::class)->prefix('devices')->group(function () {
+Route::controller(DevicesController::class)->prefix('devices')->middleware('checkAuth')->group(function () {
     Route::get('', 'index');
     Route::get('show/{meta}', 'show');
     Route::get('new', 'new');
@@ -43,13 +52,16 @@ Route::controller(DevicesController::class)->prefix('devices')->group(function (
     // Route::post('/controlling/update', 'update');
 });
 
-Route::controller(ControllingController::class)->prefix('controls')->group(function () {
+Route::controller(ControllingController::class)->prefix('controls')->middleware('checkAuth')->group(function () {
     Route::get('', 'index');
+    Route::get('timer/{id}', 'indextimer');
     Route::get('{meta}', 'show');
     Route::get('new', 'new');
     Route::post('new', 'new');
     Route::get('devices/update/{meta}', 'update');
     Route::post('devices/update/{meta}', 'update');
+    // Route::post('/timer/{nama_state}', 'update');
+
     // Route::post('/controlling/update', 'update');
 });
 Route::controller(UsersController::class)->prefix('users')->middleware('checkAuth')->group(function () {
@@ -61,7 +73,7 @@ Route::controller(UsersController::class)->prefix('users')->middleware('checkAut
     Route::post('update/{meta}', 'update');
     // Route::post('/controlling/update', 'update');
 });
-Route::controller(LampsController::class)->prefix('lamps')->group(function () {
+Route::controller(LampsController::class)->prefix('lamps')->middleware('checkAuth')->group(function () {
     Route::get('', 'index');
     Route::get('show/{meta}', 'show');
     Route::get('new', 'new');
@@ -70,11 +82,12 @@ Route::controller(LampsController::class)->prefix('lamps')->group(function () {
     Route::post('devices/update/{meta}', 'update');
     // Route::post('/controlling/update', 'update');
 });
-Route::controller(LogsController::class)->prefix('logs')->group(function () {
+Route::controller(LogsController::class)->prefix('logs')->middleware('checkAuth')->group(function () {
     Route::get('', 'index');
     Route::get('show/{meta}', 'show');
 
     // Route::post('/controlling/update', 'update');
 });
 
-Route::get("/monitoring" . "/{device}", [MonitoringDevicesController::class, 'index']);
+Route::get("/monitoring" . "/{device}", [MonitoringDevicesController::class, 'index'])->middleware('checkAuth');
+Route::get("/monitoringlamp" . "/{nama_lampu}", [MonitoringLampsController::class, 'index'])->middleware('checkAuth');

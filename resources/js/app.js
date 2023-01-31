@@ -1,4 +1,4 @@
 import './bootstrap';
-
-import './MonitoringDevice';
+import './Homepage';
+// import './MonitoringDevice';
 // import './Homepage';

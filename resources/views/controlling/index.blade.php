@@ -41,11 +41,11 @@
                         <tr>
 
                             <td scope="min-width">
-                                <?= $no=+1 ?>
+                                {{ $no=+1 }}
 
                             </td>
                             <td scope="min-width">
-                                <?= $dataControls->nama_lampu; ?>
+                                {{ $dataControls->nama_lampu }}
 
                             </td>
                             <?php
@@ -60,21 +60,21 @@
                             <td scope="min-width">
                                 <div>
 
-                                    <?= $dataControls->mode; ?>
+                                    {{ $dataControls->mode }}
                                     <div class="text-muted fs-6 fw-light">
-                                        <p>Started At : <?= $dataControls->started_at?></p>
-                                        <p>Ended At : <?= $dataControls->ended_at ?></p>
+                                        <p>Started At : {{ $dataControls->started_at }}</p>
+                                        <p>Ended At : {{ $dataControls->ended_at }}  </p>
                                     </div>
                                 </div>
                             </td>
 
                             <td scope="col">
-                                <?= '<label class="switch"><input type="checkbox" data-toggle="toggle" data-size="md" data-onstyle="success"  data-offstyle="danger" onchange="executeAction(this)" port="'.$dataControls->port.'" name="'.$dataControls->port.'" id="' . $dataControls->device_id . '" ' . $checked . '><span class="slider"></span></label><br>'?>
+                                <?= '<label class="switch"><input type="checkbox" data-toggle="toggle" data-size="md" data-onstyle="success"  data-offstyle="danger" onchange="executeAction(this)" port="'.$dataControls->port.'" name="'.$dataControls->port.'" id="' . $dataControls->nama_state . '" ' . $checked . '><span class="slider"></span></label><br>'?>
                             </td>
                             <?php
 
                         if($dataControls->mode == "AUTO"){
-                            echo "<script>document.getElementById('{$dataControls->device_id}').disabled = true;</script>";
+                            echo "<script>document.getElementById('{$dataControls->nama_state}').disabled = true;</script>";
                         }
                         ?>
                             <td scope="min-width">
@@ -87,7 +87,7 @@
                                 <div class="d-flex">
                                     <div class="action">
                                         <button class="btn btn-md text-primary">
-                                            <a href="/setting/<?= $dataControls->id ?>">
+                                            <a href="/controls/timer/{{ $dataControls->id  }} ">
                                                 <i class="fa fa-wrench"></i>
                                             </a>
                                         </button>
@@ -116,10 +116,17 @@
             var port = (element.name);
             if (element.checked) {
                 $.ajax({
-                    type: "POST",
-                    url: "/api/storedata",
+                    type: "get",
+                    url: "/api/antares/action",
                     // data: '{"id":"'+id+'","mode":"MANUAL","state":"on"}',
-                    data: '{"id":"' + id + '","mode":"MANUAL","state":"ON","port":"' + port + '"}',
+                    data: {
+                    mode:"MANUAL",
+                     ports: port,
+                     state: "ON",
+                     id: id,
+
+                    },
+                    // data: '{"id":"' + id + '","mode":"MANUAL","state":"ON","port":"' + port + '"}',
                     dataType: "json",
                     success: function (response) {
                         console.log(response);
@@ -128,13 +135,19 @@
                 });
             } else {
                 $.ajax({
-                    type: "POST",
-                    url: "/api/storedata",
+                    type: "get",
+                    url: "/api/antares/action",
                     // data: '{"id":"'+id+'","mode":"MANUAL","state":"on"}',
-                    data: '{"id":"' + id + '","mode":"MANUAL","state":"OFF","port":"' + port + '"}',
-                    dataType: "json",
+                    data: {
+                        mode:"MANUAL",
+                     ports: port,
+                     state: "OFF",
+                     id: id,
+
+                  },
+                   dataType: "json",
                     success: function (response) {
-                        // console.log(response);
+                        console.log(response);
                     }
                 });
             }
