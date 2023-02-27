@@ -24,7 +24,7 @@
                         <?php
                         $no_device =1;
                         ?>
-                        <?php foreach ($dataLamp as $dataLamps) :
+                        <?php foreach ($lamps as $dataLamps) :
                               $status = $dataLamps['status'];
                               $datastatus = ['Active','Pending','Not Active'];
                               $datastatusindic = ['active-btn','warning-btn','danger-btn'] ;
@@ -45,7 +45,7 @@
                             <?= $dataLamps["nama_lampu"]; ?>
                         </td>
                         <td scope="col">
-                            <?= $dataLamps["brand"]; ?>
+                            <?= $dataLamps["brand_lampu"]; ?>
                         </td>
                         <td scope="col">
                             <?= $dataLamps["type"]; ?>
@@ -57,12 +57,12 @@
                         <div class="d-flex">
                             <div class="action">
                                 <button class="btn text-primary">
-                                <a href="/lamp/<?= $dataLamps['id'] ?>/edit" class="btnedit">
+                                <a href="/lamps/update/<?= $dataLamps['id'] ?>" class="btnedit">
                                     <i class="fa fa-wrench"></i>
                                 </a>
                                 </button>
                             </div>
-                            <form action="/lamp/<?= $dataLamps['id']; ?>" method="GET" class="d-inline btnshow">
+                            <form action="/lamps/show/<?= $dataLamps['meta'] ?>" method="GET" class="d-inline btnshow">
                                 <!-- <input type="hidden" name="_method" value="DELETE" > -->
                                 <div class="actionshow">
                                     <button type="submit" class="btn text-success">
@@ -70,7 +70,7 @@
                                     </button>
                                 </div>
                             </form>
-                            <form action="/lamp/<?= $dataLamps['id']; ?>" method="POST" class="d-inline deletedevice">
+                            <form action="/lamps/<?= $dataLamps['id']; ?>" method="POST" class="d-inline deletedevice">
                             <input type="hidden" name="_method" value="DELETE" >
                                 <div class="action">
                                     <button type="submit" class="btn text-danger">
@@ -118,15 +118,15 @@
 
         $('.btnshow').submit(function(e){
             e.preventDefault();
-            var ids = $(this).data('id')
+            // var ids = $(this).data('id')
             $.ajax({
                 type: $(this).attr('method'),
                 url: $(this).attr('action'),
-                data: {id:ids},
+                // data: {id:ids},
                 dataType: "json",
                 success: function (response) {
-                    $('.viewmodal').html(response.data).show();
-                    $('#device_detail').modal('show');
+                    $('.viewmodal').html(response.data).show(   );
+                    $('#lamp_detail').modal('show');
                 },
                 error: function(xhr,ajaxOptions,thrownError){
                     alert(xhr.status + xhr.responseText + thrownError);

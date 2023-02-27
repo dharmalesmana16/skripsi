@@ -33,13 +33,8 @@
                         <td><span id="lokasi"></span><?= $dataDevice['latitude'].",".$dataDevice['longitude']; ?></td>
 
                     </tr>
-
-
-
                 </tbody>
-
           </table>
-
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>      </div>

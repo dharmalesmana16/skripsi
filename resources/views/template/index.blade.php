@@ -29,14 +29,15 @@
     <script src="/js/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZNeW2NCcTSr0mnu-SAMQCIWkTXcMJNSE&callback=myMap"></script>
 
-    @vite(['resources/js/app.js'])
+
 </head>
 
   <body>
 
     <!-- ======== sidebar-nav start =========== -->
-    <aside class="sidebar-nav-wrapper overflow-hidden">
+    <aside class="sidebar-nav-wrapper overflow-hidden ">
       <div class="navbar-logo">
         <a href="{{ url('/') }}  ">
           <img src="/images/udayana.png" alt="logo" class="img-fluid w-50" />
@@ -114,6 +115,10 @@
             </ul>
           </li>
 
+
+
+
+          <span class="divider"><hr /></span>
           <li class="nav-item nav-item-has-children">
             <a
               href="#0"
@@ -141,18 +146,15 @@
 
               <span class="text">Data User</span>
             </a>
-		              </li>
+            </li>
               <li>
-			  <a href="{{ url('/lamps') }})">
+			  <a href="{{ url('/lamps') }}">
 
-              <span class="text">Data Lamp</span>
+                <span class="text">Data Lamp</span>
             </a>
 		  </li>
             </ul>
           </li>
-
-
-          <span class="divider"><hr /></span>
           <li class="nav-item menus">
             <a href="{{ url('/maintenance') }}">
               <span class="icon">
@@ -179,14 +181,14 @@
 
           <span class="divider"><hr /></span>
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="notification.html">
               <span class="icon">
               <i class="fa-solid fa-bell"></i>
               </span>
               <span class="text">Notifications</span>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </nav>
 
@@ -197,7 +199,7 @@
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper">
       <!-- ========== header start ========== -->
-      <header class="header">
+      <header class="header bg-warning">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-5 col-md-5 col-6">
@@ -331,6 +333,7 @@
     @stack('homeJS')
     @stack('moreAssets')
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZNeW2NCcTSr0mnu-SAMQCIWkTXcMJNSE&callback=myMap"></script>
 
     <!-- ======== main-wrapper end =========== -->
     <script src="/js/sweetalert2/sweetalert2.all.min.js"></script>

@@ -69,10 +69,30 @@ class DevicesController extends Controller
 
     }
 
-    // public function update(Request $request, $id)
-    // {
+    public function update(Request $request, $meta)
+    {
+        $data = [
+            "title" => "Edit Page",
+            "dataDevice" => $this->devices->getData($meta),
+        ];
+        if ($request->isMethod('get')) {
 
-    // }
+            return view('config.devices.edit', $data);
+        } else {
+
+            $devices = $this->devices::find($meta);
+            $devices->nama_device = $request->nama_device;
+            $devices->brand_device = $request->brand_device;
+            $devices->ipaddress = $request->ip;
+            $devices->macaddress = $request->mac;
+            $devices->meta = Str::slug($request->nama_device);
+            $devices->latitude = $request->latitude;
+            $devices->longitude = $request->longitude;
+            $devices->save();
+            return redirect('/devices');
+        }
+
+    }
     // public function delete($id)
     // {
 

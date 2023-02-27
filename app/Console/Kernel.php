@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use \Spatie\ShortSchedule\ShortSchedule;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,9 +24,17 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
+    protected function shortSchedule(ShortSchedule $shortSchedule)
+    {
+        // this artisan command will run every second
+        $shortSchedule->command('test')->everySecond();
+
+        // this artisan command will run every second, its signature will be resolved from container
+        $shortSchedule->command(\Spatie\ShortSchedule\Tests\Unit\TestCommand::class)->everySecond();
+    }
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

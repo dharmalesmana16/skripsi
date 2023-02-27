@@ -34,7 +34,7 @@ class AuthController extends Controller
                         'role' => $checkAuth->ROLE,
                     ]);
 
-                    return redirect(url('/users'));
+                    return redirect(url('/'));
                 }
             } else {
                 Session::flash('error', "Password Anda Salah !");

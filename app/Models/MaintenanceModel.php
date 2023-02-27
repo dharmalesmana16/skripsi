@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UsersModel extends Model
+class MaintenanceModel extends Model
 {
     use HasFactory;
-
-    protected $table = 'users';
+    protected $table = 'lamps';
     public $timestamps = true;
 
     // protected $guarded = ["*"];
-    protected $fillable = ['first_namee', 'last_name',
-        'username', 'email', 'handphone', 'password', 'created_at', 'updated_at', 'status', 'ROLE', 'foto'];
+    protected $fillable = ['jenis_pebaikan', 'action',
+        'updated_at', 'created_at', 'biaya_keluar', 'users', 'komponen'];
     public function getData($id = false)
     {
         if ($id === false) {
